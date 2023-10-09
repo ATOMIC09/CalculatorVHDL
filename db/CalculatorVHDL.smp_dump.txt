@@ -1,0 +1,6 @@
+
+State Machine - |CalculatorVHDL|FSM:FSM|current_state
+Name current_state.FINISHED current_state.GET_OPERATOR current_state.GET_AandB 
+current_state.GET_AandB 0 0 0 
+current_state.GET_OPERATOR 0 1 1 
+current_state.FINISHED 1 0 1 

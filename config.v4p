@@ -1,0 +1,14 @@
+{
+  "libraries": {
+    "spi_pkg.vhd": "spi_lib, spi_test_lib",
+    "libs/math/*.vhd": "math_lib",
+    "libs/**/string*.vhd": "string_lib"
+  },
+  "excludes": {
+    "**/out/*.vhd": true
+  },
+  "settings": {
+    "V4p.Settings.Formatting.Indentation.TabWidth": 4,
+    "V4p.Settings.Formatting.Indentation.UseTabs": true 
+  }
+}

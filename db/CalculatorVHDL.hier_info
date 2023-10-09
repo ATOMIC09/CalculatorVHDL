@@ -1,0 +1,331 @@
+|CalculatorVHDL
+CLK => fsm:FSM.clk
+CLK => operatorselector:OperatorSelector.clk
+CLK => binaryadderandsubtractor:Adder.clock
+CLK => binaryadderandsubtractor:Subtractor.clock
+RST_N => fsm:FSM.rst_n
+Start => fsm:FSM.start
+SWITCHES[0] => fsm:FSM.switches[0]
+SWITCHES[1] => fsm:FSM.switches[1]
+SWITCHES[2] => fsm:FSM.switches[2]
+SWITCHES[3] => fsm:FSM.switches[3]
+SWITCHES[4] => fsm:FSM.switches[4]
+SWITCHES[5] => fsm:FSM.switches[5]
+SWITCHES[6] => fsm:FSM.switches[6]
+SWITCHES[7] => fsm:FSM.switches[7]
+SWITCHES[8] => fsm:FSM.switches[8]
+SWITCHES[9] => fsm:FSM.switches[9]
+
+
+|CalculatorVHDL|FSM:FSM
+clk => done~reg0.CLK
+clk => operator_out[0]~reg0.CLK
+clk => operator_out[1]~reg0.CLK
+clk => B_out[0]~reg0.CLK
+clk => B_out[1]~reg0.CLK
+clk => B_out[2]~reg0.CLK
+clk => B_out[3]~reg0.CLK
+clk => B_out[4]~reg0.CLK
+clk => A_out[0]~reg0.CLK
+clk => A_out[1]~reg0.CLK
+clk => A_out[2]~reg0.CLK
+clk => A_out[3]~reg0.CLK
+clk => A_out[4]~reg0.CLK
+clk => stored_done.CLK
+clk => stored_operator[0].CLK
+clk => stored_operator[1].CLK
+clk => stored_B[0].CLK
+clk => stored_B[1].CLK
+clk => stored_B[2].CLK
+clk => stored_B[3].CLK
+clk => stored_B[4].CLK
+clk => stored_A[0].CLK
+clk => stored_A[1].CLK
+clk => stored_A[2].CLK
+clk => stored_A[3].CLK
+clk => stored_A[4].CLK
+clk => current_state~4.DATAIN
+rst_n => stored_done.ACLR
+rst_n => stored_operator[0].ACLR
+rst_n => stored_operator[1].ACLR
+rst_n => stored_B[0].ACLR
+rst_n => stored_B[1].ACLR
+rst_n => stored_B[2].ACLR
+rst_n => stored_B[3].ACLR
+rst_n => stored_B[4].ACLR
+rst_n => stored_A[0].ACLR
+rst_n => stored_A[1].ACLR
+rst_n => stored_A[2].ACLR
+rst_n => stored_A[3].ACLR
+rst_n => stored_A[4].ACLR
+rst_n => current_state~6.DATAIN
+rst_n => done~reg0.ENA
+rst_n => A_out[4]~reg0.ENA
+rst_n => A_out[3]~reg0.ENA
+rst_n => A_out[2]~reg0.ENA
+rst_n => A_out[1]~reg0.ENA
+rst_n => A_out[0]~reg0.ENA
+rst_n => B_out[4]~reg0.ENA
+rst_n => B_out[3]~reg0.ENA
+rst_n => B_out[2]~reg0.ENA
+rst_n => B_out[1]~reg0.ENA
+rst_n => B_out[0]~reg0.ENA
+rst_n => operator_out[1]~reg0.ENA
+rst_n => operator_out[0]~reg0.ENA
+start => current_state.OUTPUTSELECT
+start => current_state.OUTPUTSELECT
+start => current_state.OUTPUTSELECT
+start => current_state.OUTPUTSELECT
+start => current_state.OUTPUTSELECT
+switches[0] => stored_B[0].DATAIN
+switches[0] => stored_operator[0].DATAIN
+switches[1] => stored_B[1].DATAIN
+switches[1] => stored_operator[1].DATAIN
+switches[2] => stored_B[2].DATAIN
+switches[3] => stored_B[3].DATAIN
+switches[4] => stored_B[4].DATAIN
+switches[5] => stored_A[0].DATAIN
+switches[6] => stored_A[1].DATAIN
+switches[7] => stored_A[2].DATAIN
+switches[8] => stored_A[3].DATAIN
+switches[9] => stored_A[4].DATAIN
+A_out[0] <= A_out[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+A_out[1] <= A_out[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+A_out[2] <= A_out[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+A_out[3] <= A_out[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+A_out[4] <= A_out[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+B_out[0] <= B_out[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+B_out[1] <= B_out[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+B_out[2] <= B_out[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+B_out[3] <= B_out[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+B_out[4] <= B_out[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+operator_out[0] <= operator_out[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+operator_out[1] <= operator_out[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+done <= done~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|CalculatorVHDL|OperatorSelector:OperatorSelector
+clk => enaop_adder~reg0.CLK
+clk => enaop_multiplier~reg0.CLK
+clk => enaop_subtractor~reg0.CLK
+clk => enaop_divider~reg0.CLK
+enable => enaop_adder~reg0.ENA
+enable => enaop_multiplier~reg0.ENA
+enable => enaop_subtractor~reg0.ENA
+enable => enaop_divider~reg0.ENA
+operator_in[0] => Mux0.IN5
+operator_in[0] => Mux1.IN5
+operator_in[0] => Mux2.IN5
+operator_in[0] => Mux3.IN5
+operator_in[1] => Mux0.IN4
+operator_in[1] => Mux1.IN4
+operator_in[1] => Mux2.IN4
+operator_in[1] => Mux3.IN4
+enaop_adder <= enaop_adder~reg0.DB_MAX_OUTPUT_PORT_TYPE
+enaop_subtractor <= enaop_subtractor~reg0.DB_MAX_OUTPUT_PORT_TYPE
+enaop_multiplier <= enaop_multiplier~reg0.DB_MAX_OUTPUT_PORT_TYPE
+enaop_divider <= enaop_divider~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|CalculatorVHDL|BinaryAdderAndSubtractor:Adder
+a[0] => FullAdder:FA0.x
+a[1] => FullAdder:FA_gen:1:FAi.x
+a[2] => FullAdder:FA_gen:2:FAi.x
+a[3] => FullAdder:FA_gen:3:FAi.x
+a[4] => FullAdder:FA_gen:4:FAi.x
+b[0] => comb.IN0
+b[1] => FA_gen.IN0
+b[2] => FA_gen.IN0
+b[3] => FA_gen.IN0
+b[4] => FA_gen.IN0
+m => comb.IN1
+m => FA_gen.IN1
+m => FA_gen.IN1
+m => FA_gen.IN1
+m => FA_gen.IN1
+m => FullAdder:FA0.z
+clock => FullAdder:FA0.clk
+clock => FullAdder:FA_gen:1:FAi.clk
+clock => FullAdder:FA_gen:2:FAi.clk
+clock => FullAdder:FA_gen:3:FAi.clk
+clock => FullAdder:FA_gen:4:FAi.clk
+s[0] <= FullAdder:FA0.s
+s[1] <= FullAdder:FA_gen:1:FAi.s
+s[2] <= FullAdder:FA_gen:2:FAi.s
+s[3] <= FullAdder:FA_gen:3:FAi.s
+s[4] <= FullAdder:FA_gen:4:FAi.s
+c[0] <= comb.DB_MAX_OUTPUT_PORT_TYPE
+c[1] <= c[1].DB_MAX_OUTPUT_PORT_TYPE
+c[2] <= c[2].DB_MAX_OUTPUT_PORT_TYPE
+c[3] <= c[3].DB_MAX_OUTPUT_PORT_TYPE
+c[4] <= c[4].DB_MAX_OUTPUT_PORT_TYPE
+c[5] <= c[5].DB_MAX_OUTPUT_PORT_TYPE
+v <= v.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|CalculatorVHDL|BinaryAdderAndSubtractor:Adder|Fulladder:FA0
+x => s.IN0
+x => c.IN0
+y => s.IN1
+y => c.IN1
+z => s.IN1
+z => c.IN1
+clk => c~reg0.CLK
+clk => s~reg0.CLK
+s <= s~reg0.DB_MAX_OUTPUT_PORT_TYPE
+c <= c~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|CalculatorVHDL|BinaryAdderAndSubtractor:Adder|Fulladder:\FA_gen:1:FAi
+x => s.IN0
+x => c.IN0
+y => s.IN1
+y => c.IN1
+z => s.IN1
+z => c.IN1
+clk => c~reg0.CLK
+clk => s~reg0.CLK
+s <= s~reg0.DB_MAX_OUTPUT_PORT_TYPE
+c <= c~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|CalculatorVHDL|BinaryAdderAndSubtractor:Adder|Fulladder:\FA_gen:2:FAi
+x => s.IN0
+x => c.IN0
+y => s.IN1
+y => c.IN1
+z => s.IN1
+z => c.IN1
+clk => c~reg0.CLK
+clk => s~reg0.CLK
+s <= s~reg0.DB_MAX_OUTPUT_PORT_TYPE
+c <= c~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|CalculatorVHDL|BinaryAdderAndSubtractor:Adder|Fulladder:\FA_gen:3:FAi
+x => s.IN0
+x => c.IN0
+y => s.IN1
+y => c.IN1
+z => s.IN1
+z => c.IN1
+clk => c~reg0.CLK
+clk => s~reg0.CLK
+s <= s~reg0.DB_MAX_OUTPUT_PORT_TYPE
+c <= c~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|CalculatorVHDL|BinaryAdderAndSubtractor:Adder|Fulladder:\FA_gen:4:FAi
+x => s.IN0
+x => c.IN0
+y => s.IN1
+y => c.IN1
+z => s.IN1
+z => c.IN1
+clk => c~reg0.CLK
+clk => s~reg0.CLK
+s <= s~reg0.DB_MAX_OUTPUT_PORT_TYPE
+c <= c~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|CalculatorVHDL|BinaryAdderAndSubtractor:Subtractor
+a[0] => FullAdder:FA0.x
+a[1] => FullAdder:FA_gen:1:FAi.x
+a[2] => FullAdder:FA_gen:2:FAi.x
+a[3] => FullAdder:FA_gen:3:FAi.x
+a[4] => FullAdder:FA_gen:4:FAi.x
+b[0] => comb.IN0
+b[1] => FA_gen.IN0
+b[2] => FA_gen.IN0
+b[3] => FA_gen.IN0
+b[4] => FA_gen.IN0
+m => comb.IN1
+m => FA_gen.IN1
+m => FA_gen.IN1
+m => FA_gen.IN1
+m => FA_gen.IN1
+m => FullAdder:FA0.z
+clock => FullAdder:FA0.clk
+clock => FullAdder:FA_gen:1:FAi.clk
+clock => FullAdder:FA_gen:2:FAi.clk
+clock => FullAdder:FA_gen:3:FAi.clk
+clock => FullAdder:FA_gen:4:FAi.clk
+s[0] <= FullAdder:FA0.s
+s[1] <= FullAdder:FA_gen:1:FAi.s
+s[2] <= FullAdder:FA_gen:2:FAi.s
+s[3] <= FullAdder:FA_gen:3:FAi.s
+s[4] <= FullAdder:FA_gen:4:FAi.s
+c[0] <= comb.DB_MAX_OUTPUT_PORT_TYPE
+c[1] <= c[1].DB_MAX_OUTPUT_PORT_TYPE
+c[2] <= c[2].DB_MAX_OUTPUT_PORT_TYPE
+c[3] <= c[3].DB_MAX_OUTPUT_PORT_TYPE
+c[4] <= c[4].DB_MAX_OUTPUT_PORT_TYPE
+c[5] <= c[5].DB_MAX_OUTPUT_PORT_TYPE
+v <= v.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|CalculatorVHDL|BinaryAdderAndSubtractor:Subtractor|Fulladder:FA0
+x => s.IN0
+x => c.IN0
+y => s.IN1
+y => c.IN1
+z => s.IN1
+z => c.IN1
+clk => c~reg0.CLK
+clk => s~reg0.CLK
+s <= s~reg0.DB_MAX_OUTPUT_PORT_TYPE
+c <= c~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|CalculatorVHDL|BinaryAdderAndSubtractor:Subtractor|Fulladder:\FA_gen:1:FAi
+x => s.IN0
+x => c.IN0
+y => s.IN1
+y => c.IN1
+z => s.IN1
+z => c.IN1
+clk => c~reg0.CLK
+clk => s~reg0.CLK
+s <= s~reg0.DB_MAX_OUTPUT_PORT_TYPE
+c <= c~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|CalculatorVHDL|BinaryAdderAndSubtractor:Subtractor|Fulladder:\FA_gen:2:FAi
+x => s.IN0
+x => c.IN0
+y => s.IN1
+y => c.IN1
+z => s.IN1
+z => c.IN1
+clk => c~reg0.CLK
+clk => s~reg0.CLK
+s <= s~reg0.DB_MAX_OUTPUT_PORT_TYPE
+c <= c~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|CalculatorVHDL|BinaryAdderAndSubtractor:Subtractor|Fulladder:\FA_gen:3:FAi
+x => s.IN0
+x => c.IN0
+y => s.IN1
+y => c.IN1
+z => s.IN1
+z => c.IN1
+clk => c~reg0.CLK
+clk => s~reg0.CLK
+s <= s~reg0.DB_MAX_OUTPUT_PORT_TYPE
+c <= c~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|CalculatorVHDL|BinaryAdderAndSubtractor:Subtractor|Fulladder:\FA_gen:4:FAi
+x => s.IN0
+x => c.IN0
+y => s.IN1
+y => c.IN1
+z => s.IN1
+z => c.IN1
+clk => c~reg0.CLK
+clk => s~reg0.CLK
+s <= s~reg0.DB_MAX_OUTPUT_PORT_TYPE
+c <= c~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
