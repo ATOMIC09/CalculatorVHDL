@@ -1,53 +1,41 @@
-library ieee;
-use ieee.std_logic_1164.all;
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
-entity Multiplier2 is
-    generic (
-        N : integer := 5
-    );
-    port(
-        clk, rst, enable : in std_logic;
-        a, b : in std_logic_vector(3 downto 0);
-        p : out std_logic_vector(7 downto 0)
-    );
-end entity;
+entity multiplier is
+    generic (N : integer := 5);
+    Port ( clk : in STD_LOGIC;
+           enable : in STD_LOGIC;
+           reset : in STD_LOGIC;
+           A : in  STD_LOGIC_VECTOR (N-1 downto 0);
+           B : in  STD_LOGIC_VECTOR (N-1 downto 0);
+           R : out STD_LOGIC_VECTOR (2*N-1 downto 0));
+end multiplier;
 
-architecture Behavioral of Multiplier2 is
-    signal total : std_logic_vector(N-1 downto 0);
-    signal C_INTERNAL : std_logic_vector(1 to N);
-
-    component BinaryAdderAndSubtractor is
-        port (
-            A, B : in std_logic_vector(N-1 downto 0);
-            M : in std_logic := '0';
-            S : out std_logic_vector(N-1 downto 0);
-            C : out std_logic_vector(N downto 0);
-            V : out std_logic
-        );
-    end component;
-
+architecture Behavioral of multiplier is
 begin
-    process(clk, rst, enable)
+    process(clk, reset)
+        variable result : STD_LOGIC_VECTOR(2*N-1 downto 0) := (others => '0'); -- init all bits to zero
+        variable multiplicand : STD_LOGIC_VECTOR(N-1 downto 0);
+        variable multiplier : STD_LOGIC_VECTOR(N-1 downto 0);
     begin
-        if rst = '1' then
-            total <= (others => '0');
-            C_INTERNAL <= (others => '0');
-        elsif enable = '1' then
-            if rising_edge(clk) then
-                for i in 0 to n-1 loop
-                    uut : BinaryAdderAndSubtractor;
-                        port map (
-                            A => total,
-                            B => a,
-                            M => '0',
-                            S => total,
-                            C => C_INTERNAL
-                        );
+        if reset = '1' then
+            result := (others => '0');
+            R <= result;
+        elsif rising_edge(clk) then
+            if enable = '1' then
+                multiplicand := unsigned("00000" & A); -- add 5 zeros to the left of multiplicand
+                multiplier := B;
+                
+                for i in 0 to N-1 loop
+                    if multiplier(i) = '1' then -- if bit of multiplier is 1, add multiplicand to result. if 0, do nothing
+                        result := STD_LOGIC_VECTOR(result + signed(multiplicand));
+                    end if;
+                    multiplicand := shift_left(multiplicand, 1); -- shifts bit of mutiplicand to the left by one
                 end loop;
+                
+                R <= result;
             end if;
         end if;
     end process;
-
-    p <= total;
-
 end Behavioral;
