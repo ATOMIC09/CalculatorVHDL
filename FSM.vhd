@@ -8,7 +8,9 @@ entity FSM is
         switches : in STD_LOGIC_VECTOR(2*N-1 downto 0); 
         A_out, B_out : out STD_LOGIC_VECTOR (N-1 downto 0);
         operator_out : out STD_LOGIC_VECTOR(1 downto 0);
-        done : out STD_LOGIC
+        done : out STD_LOGIC;
+        preview_A, preview_B : out STD_LOGIC_VECTOR(N-1 downto 0) := (others => '0');
+        preview_operator : out STD_LOGIC_VECTOR(1 downto 0) := (others => '0')
     );
 end FSM;
 
@@ -20,8 +22,17 @@ architecture Behavioral of FSM is
     signal stored_done : std_logic := '0';
 
 begin
-    process(clk, rst_n)
+    process(clk, rst_n, start)
     begin
+
+        if rising_edge(start) then
+            case current_state is
+                when GET_AandB => current_state <= GET_OPERATOR;
+                when GET_OPERATOR => current_state <= FINISHED;
+                when FINISHED => current_state <= FINISHED;
+            end case;
+        end if;
+
         if rst_n = '1' then
             stored_A <= (others => '0');
             stored_B <= (others => '0');
@@ -33,14 +44,11 @@ begin
                 when GET_AandB =>
                     stored_A <= switches(2*N-1 downto (2*N-1)-(N-1));
                     stored_B <= switches(N-1 downto 0);
-                    if start = '1' then
-                        current_state <= GET_OPERATOR;
-                    end if;
+                    preview_A <= switches(2*N-1 downto (2*N-1)-(N-1));
+                    preview_B <= switches(N-1 downto 0);
                 when GET_OPERATOR =>
                     stored_operator <= switches(1 downto 0);
-                    if start = '1' then
-                        current_state <= FINISHED;
-                    end if;
+                    preview_operator <= switches(1 downto 0);
                 when FINISHED =>
                     A_out <= stored_A;
                     B_out <= stored_B;

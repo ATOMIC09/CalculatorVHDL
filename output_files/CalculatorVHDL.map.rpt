@@ -1,5 +1,5 @@
 Analysis & Synthesis report for CalculatorVHDL
-Mon Oct 09 22:43:40 2023
+Wed Oct 11 12:10:14 2023
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -15,18 +15,53 @@ Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
   7. Analysis & Synthesis Resource Utilization by Entity
   8. State Machine - |CalculatorVHDL|FSM:FSM|current_state
   9. Registers Removed During Synthesis
- 10. General Register Statistics
- 11. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 10. Removed Registers Triggering Further Register Optimizations
+ 11. General Register Statistics
  12. Parameter Settings for User Entity Instance: Top-level Entity: |CalculatorVHDL
  13. Parameter Settings for User Entity Instance: FSM:FSM
- 14. Parameter Settings for User Entity Instance: BinaryAdderAndSubtractor:Adder
- 15. Parameter Settings for User Entity Instance: BinaryAdderAndSubtractor:Subtractor
- 16. Port Connectivity Checks: "BinaryAdderAndSubtractor:Subtractor"
- 17. Port Connectivity Checks: "BinaryAdderAndSubtractor:Adder"
- 18. Port Connectivity Checks: "OperatorSelector:OperatorSelector"
- 19. Post-Synthesis Netlist Statistics for Top Partition
- 20. Elapsed Time Per Partition
- 21. Analysis & Synthesis Messages
+ 14. Parameter Settings for User Entity Instance: SignDetectorPreview:SignDetectorPreviewA
+ 15. Parameter Settings for User Entity Instance: SignDetectorPreview:SignDetectorPreviewA|BinaryAdderAndSubtractor:adder
+ 16. Parameter Settings for User Entity Instance: SignDetectorPreview:SignDetectorPreviewB
+ 17. Parameter Settings for User Entity Instance: SignDetectorPreview:SignDetectorPreviewB|BinaryAdderAndSubtractor:adder
+ 18. Parameter Settings for User Entity Instance: BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA
+ 19. Parameter Settings for User Entity Instance: BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB
+ 20. Parameter Settings for User Entity Instance: MUX6to3_Result:MUX_Result
+ 21. Parameter Settings for User Entity Instance: MUX6to3_Result:MUX_Result_B
+ 22. Parameter Settings for User Entity Instance: BCDto7Segment:BCD_DIGIT_1_A
+ 23. Parameter Settings for User Entity Instance: BCDto7Segment:BCD_DIGIT_2_A
+ 24. Parameter Settings for User Entity Instance: BCDto7Segment:BCD_DIGIT_3_A
+ 25. Parameter Settings for User Entity Instance: BCDto7Segment:BCD_DIGIT_1_B
+ 26. Parameter Settings for User Entity Instance: BCDto7Segment:BCD_DIGIT_2_B
+ 27. Parameter Settings for User Entity Instance: BCDto7Segment:BCD_DIGIT_3_B
+ 28. Parameter Settings for User Entity Instance: BinaryAdderAndSubtractor:Adder
+ 29. Parameter Settings for User Entity Instance: BinaryAdderAndSubtractor:Subtractor
+ 30. Parameter Settings for User Entity Instance: SignDetector:SignDetect_Adder
+ 31. Parameter Settings for User Entity Instance: SignDetector:SignDetect_Adder|BinaryAdderAndSubtractor:adder
+ 32. Parameter Settings for User Entity Instance: SignDetector:SignDetect_Subtractor
+ 33. Parameter Settings for User Entity Instance: SignDetector:SignDetect_Subtractor|BinaryAdderAndSubtractor:adder
+ 34. Parameter Settings for User Entity Instance: BinaryToBCDConverterADD:BinaryToBCDConverter_Adder
+ 35. Parameter Settings for User Entity Instance: BinaryToBCDConverterSUB:BinaryToBCDConverter_Subtractor
+ 36. Parameter Settings for Inferred Entity Instance: BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|lpm_divide:Mod0
+ 37. Parameter Settings for Inferred Entity Instance: BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|lpm_divide:Div0
+ 38. Parameter Settings for Inferred Entity Instance: BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|lpm_divide:Mod1
+ 39. Parameter Settings for Inferred Entity Instance: BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|lpm_divide:Mod0
+ 40. Parameter Settings for Inferred Entity Instance: BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|lpm_divide:Div0
+ 41. Parameter Settings for Inferred Entity Instance: BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|lpm_divide:Mod1
+ 42. Port Connectivity Checks: "BinaryToBCDConverterSUB:BinaryToBCDConverter_Subtractor"
+ 43. Port Connectivity Checks: "BinaryToBCDConverterADD:BinaryToBCDConverter_Adder"
+ 44. Port Connectivity Checks: "SignDetector:SignDetect_Subtractor"
+ 45. Port Connectivity Checks: "SignDetector:SignDetect_Adder|BinaryAdderAndSubtractor:adder"
+ 46. Port Connectivity Checks: "SignDetector:SignDetect_Adder"
+ 47. Port Connectivity Checks: "BinaryAdderAndSubtractor:Subtractor"
+ 48. Port Connectivity Checks: "BinaryAdderAndSubtractor:Adder"
+ 49. Port Connectivity Checks: "OperatorSelector:OperatorSelector"
+ 50. Port Connectivity Checks: "MUX6to3_Result:MUX_Result_B"
+ 51. Port Connectivity Checks: "MUX6to3_Result:MUX_Result"
+ 52. Port Connectivity Checks: "SignDetectorPreview:SignDetectorPreviewA|BinaryAdderAndSubtractor:adder"
+ 53. Port Connectivity Checks: "FSM:FSM"
+ 54. Post-Synthesis Netlist Statistics for Top Partition
+ 55. Elapsed Time Per Partition
+ 56. Analysis & Synthesis Messages
 
 
 
@@ -53,16 +88,16 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Oct 09 22:43:40 2023       ;
+; Analysis & Synthesis Status        ; Successful - Wed Oct 11 12:10:14 2023       ;
 ; Quartus Prime Version              ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name                      ; CalculatorVHDL                              ;
 ; Top-level Entity Name              ; CalculatorVHDL                              ;
 ; Family                             ; MAX 10                                      ;
-; Total logic elements               ; 0                                           ;
-;     Total combinational functions  ; 0                                           ;
-;     Dedicated logic registers      ; 0                                           ;
-; Total registers                    ; 0                                           ;
-; Total pins                         ; 13                                          ;
+; Total logic elements               ; 186                                         ;
+;     Total combinational functions  ; 146                                         ;
+;     Dedicated logic registers      ; 111                                         ;
+; Total registers                    ; 111                                         ;
+; Total pins                         ; 55                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0                                           ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
@@ -163,68 +198,132 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 12          ;
-; Maximum allowed            ; 12          ;
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 1           ;
+; Maximum used               ; 4           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
+;     Processors 3-4         ;   0.0%      ;
 +----------------------------+-------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                           ;
-+----------------------------------+-----------------+-----------------+-----------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                    ; Library ;
-+----------------------------------+-----------------+-----------------+-----------------------------------------------------------------+---------+
-; OperatorSelector.vhd             ; yes             ; User VHDL File  ; A:/Documents/GitHub/CalculatorVHDL/OperatorSelector.vhd         ;         ;
-; Fulladder.vhd                    ; yes             ; User VHDL File  ; A:/Documents/GitHub/CalculatorVHDL/Fulladder.vhd                ;         ;
-; FSM.vhd                          ; yes             ; User VHDL File  ; A:/Documents/GitHub/CalculatorVHDL/FSM.vhd                      ;         ;
-; BinaryAdderAndSubtractor.vhd     ; yes             ; User VHDL File  ; A:/Documents/GitHub/CalculatorVHDL/BinaryAdderAndSubtractor.vhd ;         ;
-; CalculatorVHDL.vhd               ; yes             ; User VHDL File  ; A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd           ;         ;
-+----------------------------------+-----------------+-----------------+-----------------------------------------------------------------+---------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                ;
++----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                            ; Library ;
++----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------------+---------+
+; SignDetectorPreview.vhd          ; yes             ; User VHDL File               ; C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/SignDetectorPreview.vhd          ;         ;
+; SignDetector.vhd                 ; yes             ; User VHDL File               ; C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/SignDetector.vhd                 ;         ;
+; OperatorSelector.vhd             ; yes             ; User VHDL File               ; C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/OperatorSelector.vhd             ;         ;
+; MUX6to3_Result.vhd               ; yes             ; User VHDL File               ; C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/MUX6to3_Result.vhd               ;         ;
+; FullAdder.vhd                    ; yes             ; User VHDL File               ; C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/FullAdder.vhd                    ;         ;
+; FSM.vhd                          ; yes             ; User VHDL File               ; C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/FSM.vhd                          ;         ;
+; CalculatorVHDL.vhd               ; yes             ; User VHDL File               ; C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd               ;         ;
+; BinaryToBCDConverterSUB.vhd      ; yes             ; User VHDL File               ; C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterSUB.vhd      ;         ;
+; BinaryToBCDConverterPreviewB.vhd ; yes             ; User VHDL File               ; C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterPreviewB.vhd ;         ;
+; BinaryToBCDConverterPreviewA.vhd ; yes             ; User VHDL File               ; C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterPreviewA.vhd ;         ;
+; BinaryToBCDConverterADD.vhd      ; yes             ; User VHDL File               ; C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterADD.vhd      ;         ;
+; BinaryAdderAndSubtractor.vhd     ; yes             ; User VHDL File               ; C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryAdderAndSubtractor.vhd     ;         ;
+; BCDto7Segment.vhd                ; yes             ; User VHDL File               ; C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BCDto7Segment.vhd                ;         ;
+; lpm_divide.tdf                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_divide.tdf                   ;         ;
+; abs_divider.inc                  ; yes             ; Megafunction                 ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/abs_divider.inc                  ;         ;
+; sign_div_unsign.inc              ; yes             ; Megafunction                 ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/sign_div_unsign.inc              ;         ;
+; aglobal201.inc                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/aglobal201.inc                   ;         ;
+; db/lpm_divide_akl.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/db/lpm_divide_akl.tdf            ;         ;
+; db/sign_div_unsign_9kh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/db/sign_div_unsign_9kh.tdf       ;         ;
+; db/alt_u_div_see.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/db/alt_u_div_see.tdf             ;         ;
+; db/add_sub_t3c.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/db/add_sub_t3c.tdf               ;         ;
+; db/add_sub_u3c.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/db/add_sub_u3c.tdf               ;         ;
+; db/lpm_divide_6sl.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/db/lpm_divide_6sl.tdf            ;         ;
+; db/sign_div_unsign_8kh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/db/sign_div_unsign_8kh.tdf       ;         ;
+; db/alt_u_div_qee.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/db/alt_u_div_qee.tdf             ;         ;
++----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------------+---------+
 
 
-+-----------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary               ;
-+---------------------------------------------+-------------+
-; Resource                                    ; Usage       ;
-+---------------------------------------------+-------------+
-;                                             ;             ;
-; Total combinational functions               ; 0           ;
-; Logic element usage by number of LUT inputs ;             ;
-;     -- 4 input functions                    ; 0           ;
-;     -- 3 input functions                    ; 0           ;
-;     -- <=2 input functions                  ; 0           ;
-;                                             ;             ;
-; Logic elements by mode                      ;             ;
-;     -- normal mode                          ; 0           ;
-;     -- arithmetic mode                      ; 0           ;
-;                                             ;             ;
-; Total registers                             ; 0           ;
-;     -- Dedicated logic registers            ; 0           ;
-;     -- I/O registers                        ; 0           ;
-;                                             ;             ;
-; I/O pins                                    ; 13          ;
-;                                             ;             ;
-; Embedded Multiplier 9-bit elements          ; 0           ;
-;                                             ;             ;
-; Maximum fan-out node                        ; SWITCHES[0] ;
-; Maximum fan-out                             ; 1           ;
-; Total fan-out                               ; 13          ;
-; Average fan-out                             ; 0.50        ;
-+---------------------------------------------+-------------+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimated Total logic elements              ; 186       ;
+;                                             ;           ;
+; Total combinational functions               ; 146       ;
+; Logic element usage by number of LUT inputs ;           ;
+;     -- 4 input functions                    ; 35        ;
+;     -- 3 input functions                    ; 34        ;
+;     -- <=2 input functions                  ; 77        ;
+;                                             ;           ;
+; Logic elements by mode                      ;           ;
+;     -- normal mode                          ; 118       ;
+;     -- arithmetic mode                      ; 28        ;
+;                                             ;           ;
+; Total registers                             ; 111       ;
+;     -- Dedicated logic registers            ; 111       ;
+;     -- I/O registers                        ; 0         ;
+;                                             ;           ;
+; I/O pins                                    ; 55        ;
+;                                             ;           ;
+; Embedded Multiplier 9-bit elements          ; 0         ;
+;                                             ;           ;
+; Maximum fan-out node                        ; CLK~input ;
+; Maximum fan-out                             ; 109       ;
+; Total fan-out                               ; 700       ;
+; Average fan-out                             ; 1.91      ;
++---------------------------------------------+-----------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                   ;
-+----------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+---------------------+----------------+--------------+
-; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name ; Entity Name    ; Library Name ;
-+----------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+---------------------+----------------+--------------+
-; |CalculatorVHDL            ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 13   ; 0            ; 0          ; |CalculatorVHDL     ; CalculatorVHDL ; work         ;
-+----------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+---------------------+----------------+--------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                                                                                                                           ;
++----------------------------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------+--------------+
+; Compilation Hierarchy Node                                     ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name                                                                                                                                                       ; Entity Name                  ; Library Name ;
++----------------------------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------+--------------+
+; |CalculatorVHDL                                                ; 146 (0)             ; 111 (0)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 55   ; 0            ; 0          ; |CalculatorVHDL                                                                                                                                                           ; CalculatorVHDL               ; work         ;
+;    |BCDto7Segment:BCD_DIGIT_1_A|                               ; 7 (7)               ; 7 (7)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BCDto7Segment:BCD_DIGIT_1_A                                                                                                                               ; BCDto7Segment                ; work         ;
+;    |BCDto7Segment:BCD_DIGIT_1_B|                               ; 7 (7)               ; 7 (7)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BCDto7Segment:BCD_DIGIT_1_B                                                                                                                               ; BCDto7Segment                ; work         ;
+;    |BCDto7Segment:BCD_DIGIT_2_A|                               ; 4 (4)               ; 6 (6)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BCDto7Segment:BCD_DIGIT_2_A                                                                                                                               ; BCDto7Segment                ; work         ;
+;    |BCDto7Segment:BCD_DIGIT_2_B|                               ; 4 (4)               ; 6 (6)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BCDto7Segment:BCD_DIGIT_2_B                                                                                                                               ; BCDto7Segment                ; work         ;
+;    |BCDto7Segment:BCD_DIGIT_3_A|                               ; 2 (2)               ; 7 (7)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BCDto7Segment:BCD_DIGIT_3_A                                                                                                                               ; BCDto7Segment                ; work         ;
+;    |BCDto7Segment:BCD_DIGIT_3_B|                               ; 2 (2)               ; 7 (7)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BCDto7Segment:BCD_DIGIT_3_B                                                                                                                               ; BCDto7Segment                ; work         ;
+;    |BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA| ; 39 (2)              ; 13 (13)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA                                                                                                 ; BinaryToBCDConverterPreviewA ; work         ;
+;       |lpm_divide:Div0|                                        ; 17 (0)              ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|lpm_divide:Div0                                                                                 ; lpm_divide                   ; work         ;
+;          |lpm_divide_6sl:auto_generated|                       ; 17 (0)              ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|lpm_divide:Div0|lpm_divide_6sl:auto_generated                                                   ; lpm_divide_6sl               ; work         ;
+;             |sign_div_unsign_8kh:divider|                      ; 17 (0)              ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|lpm_divide:Div0|lpm_divide_6sl:auto_generated|sign_div_unsign_8kh:divider                       ; sign_div_unsign_8kh          ; work         ;
+;                |alt_u_div_qee:divider|                         ; 17 (17)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|lpm_divide:Div0|lpm_divide_6sl:auto_generated|sign_div_unsign_8kh:divider|alt_u_div_qee:divider ; alt_u_div_qee                ; work         ;
+;       |lpm_divide:Mod0|                                        ; 20 (0)              ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|lpm_divide:Mod0                                                                                 ; lpm_divide                   ; work         ;
+;          |lpm_divide_akl:auto_generated|                       ; 20 (0)              ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|lpm_divide:Mod0|lpm_divide_akl:auto_generated                                                   ; lpm_divide_akl               ; work         ;
+;             |sign_div_unsign_9kh:divider|                      ; 20 (0)              ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|lpm_divide:Mod0|lpm_divide_akl:auto_generated|sign_div_unsign_9kh:divider                       ; sign_div_unsign_9kh          ; work         ;
+;                |alt_u_div_see:divider|                         ; 20 (20)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|lpm_divide:Mod0|lpm_divide_akl:auto_generated|sign_div_unsign_9kh:divider|alt_u_div_see:divider ; alt_u_div_see                ; work         ;
+;    |BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB| ; 39 (2)              ; 13 (13)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB                                                                                                 ; BinaryToBCDConverterPreviewB ; work         ;
+;       |lpm_divide:Div0|                                        ; 17 (0)              ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|lpm_divide:Div0                                                                                 ; lpm_divide                   ; work         ;
+;          |lpm_divide_6sl:auto_generated|                       ; 17 (0)              ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|lpm_divide:Div0|lpm_divide_6sl:auto_generated                                                   ; lpm_divide_6sl               ; work         ;
+;             |sign_div_unsign_8kh:divider|                      ; 17 (0)              ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|lpm_divide:Div0|lpm_divide_6sl:auto_generated|sign_div_unsign_8kh:divider                       ; sign_div_unsign_8kh          ; work         ;
+;                |alt_u_div_qee:divider|                         ; 17 (17)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|lpm_divide:Div0|lpm_divide_6sl:auto_generated|sign_div_unsign_8kh:divider|alt_u_div_qee:divider ; alt_u_div_qee                ; work         ;
+;       |lpm_divide:Mod0|                                        ; 20 (0)              ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|lpm_divide:Mod0                                                                                 ; lpm_divide                   ; work         ;
+;          |lpm_divide_akl:auto_generated|                       ; 20 (0)              ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|lpm_divide:Mod0|lpm_divide_akl:auto_generated                                                   ; lpm_divide_akl               ; work         ;
+;             |sign_div_unsign_9kh:divider|                      ; 20 (0)              ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|lpm_divide:Mod0|lpm_divide_akl:auto_generated|sign_div_unsign_9kh:divider                       ; sign_div_unsign_9kh          ; work         ;
+;                |alt_u_div_see:divider|                         ; 20 (20)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|lpm_divide:Mod0|lpm_divide_akl:auto_generated|sign_div_unsign_9kh:divider|alt_u_div_see:divider ; alt_u_div_see                ; work         ;
+;    |FSM:FSM|                                                   ; 3 (3)               ; 14 (14)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|FSM:FSM                                                                                                                                                   ; FSM                          ; work         ;
+;    |MUX6to3_Result:MUX_Result_B|                               ; 8 (8)               ; 8 (8)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|MUX6to3_Result:MUX_Result_B                                                                                                                               ; MUX6to3_Result               ; work         ;
+;    |MUX6to3_Result:MUX_Result|                                 ; 7 (7)               ; 7 (7)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|MUX6to3_Result:MUX_Result                                                                                                                                 ; MUX6to3_Result               ; work         ;
+;    |SignDetectorPreview:SignDetectorPreviewA|                  ; 12 (4)              ; 8 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|SignDetectorPreview:SignDetectorPreviewA                                                                                                                  ; SignDetectorPreview          ; work         ;
+;       |BinaryAdderAndSubtractor:adder|                         ; 8 (0)               ; 8 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|SignDetectorPreview:SignDetectorPreviewA|BinaryAdderAndSubtractor:adder                                                                                   ; BinaryAdderAndSubtractor     ; work         ;
+;          |FullAdder:FA0|                                       ; 1 (1)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|SignDetectorPreview:SignDetectorPreviewA|BinaryAdderAndSubtractor:adder|FullAdder:FA0                                                                     ; FullAdder                    ; work         ;
+;          |FullAdder:\FA_gen:1:FAi|                             ; 2 (2)               ; 2 (2)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|SignDetectorPreview:SignDetectorPreviewA|BinaryAdderAndSubtractor:adder|FullAdder:\FA_gen:1:FAi                                                           ; FullAdder                    ; work         ;
+;          |FullAdder:\FA_gen:2:FAi|                             ; 2 (2)               ; 2 (2)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|SignDetectorPreview:SignDetectorPreviewA|BinaryAdderAndSubtractor:adder|FullAdder:\FA_gen:2:FAi                                                           ; FullAdder                    ; work         ;
+;          |FullAdder:\FA_gen:3:FAi|                             ; 2 (2)               ; 2 (2)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|SignDetectorPreview:SignDetectorPreviewA|BinaryAdderAndSubtractor:adder|FullAdder:\FA_gen:3:FAi                                                           ; FullAdder                    ; work         ;
+;          |FullAdder:\FA_gen:4:FAi|                             ; 1 (1)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|SignDetectorPreview:SignDetectorPreviewA|BinaryAdderAndSubtractor:adder|FullAdder:\FA_gen:4:FAi                                                           ; FullAdder                    ; work         ;
+;    |SignDetectorPreview:SignDetectorPreviewB|                  ; 12 (4)              ; 8 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|SignDetectorPreview:SignDetectorPreviewB                                                                                                                  ; SignDetectorPreview          ; work         ;
+;       |BinaryAdderAndSubtractor:adder|                         ; 8 (0)               ; 8 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|SignDetectorPreview:SignDetectorPreviewB|BinaryAdderAndSubtractor:adder                                                                                   ; BinaryAdderAndSubtractor     ; work         ;
+;          |FullAdder:FA0|                                       ; 1 (1)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|SignDetectorPreview:SignDetectorPreviewB|BinaryAdderAndSubtractor:adder|FullAdder:FA0                                                                     ; FullAdder                    ; work         ;
+;          |FullAdder:\FA_gen:1:FAi|                             ; 2 (2)               ; 2 (2)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|SignDetectorPreview:SignDetectorPreviewB|BinaryAdderAndSubtractor:adder|FullAdder:\FA_gen:1:FAi                                                           ; FullAdder                    ; work         ;
+;          |FullAdder:\FA_gen:2:FAi|                             ; 2 (2)               ; 2 (2)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|SignDetectorPreview:SignDetectorPreviewB|BinaryAdderAndSubtractor:adder|FullAdder:\FA_gen:2:FAi                                                           ; FullAdder                    ; work         ;
+;          |FullAdder:\FA_gen:3:FAi|                             ; 2 (2)               ; 2 (2)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|SignDetectorPreview:SignDetectorPreviewB|BinaryAdderAndSubtractor:adder|FullAdder:\FA_gen:3:FAi                                                           ; FullAdder                    ; work         ;
+;          |FullAdder:\FA_gen:4:FAi|                             ; 1 (1)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |CalculatorVHDL|SignDetectorPreview:SignDetectorPreviewB|BinaryAdderAndSubtractor:adder|FullAdder:\FA_gen:4:FAi                                                           ; FullAdder                    ; work         ;
++----------------------------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -240,16 +339,56 @@ Encoding Type:  One-Hot
 +----------------------------+------------------------+----------------------------+-------------------------+
 
 
-+------------------------------------------------------------+
-; Registers Removed During Synthesis                         ;
-+---------------------------------------+--------------------+
-; Register name                         ; Reason for Removal ;
-+---------------------------------------+--------------------+
-; FSM:FSM|current_state.GET_AandB       ; Lost fanout        ;
-; FSM:FSM|current_state.GET_OPERATOR    ; Lost fanout        ;
-; FSM:FSM|current_state.FINISHED        ; Lost fanout        ;
-; Total Number of Removed Registers = 3 ;                    ;
-+---------------------------------------+--------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                                                                                            ;
++-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
+; Register name                                                                           ; Reason for Removal                                                                                  ;
++-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
+; BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|BCD_digit_3[3]                ; Stuck at VCC due to stuck port data_in                                                              ;
+; BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|BCD_digit_3[2]                ; Stuck at GND due to stuck port data_in                                                              ;
+; BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|BCD_digit_3[1]                ; Stuck at VCC due to stuck port data_in                                                              ;
+; BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|BCD_digit_3[3]                ; Stuck at VCC due to stuck port data_in                                                              ;
+; BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|BCD_digit_3[2]                ; Stuck at GND due to stuck port data_in                                                              ;
+; BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|BCD_digit_3[1]                ; Stuck at VCC due to stuck port data_in                                                              ;
+; MUX6to3_Result:MUX_Result_B|BCD_TO_SEGMENT_3_temp[2]                                    ; Stuck at GND due to stuck port data_in                                                              ;
+; MUX6to3_Result:MUX_Result|BCD_TO_SEGMENT_3_temp[2]                                      ; Stuck at GND due to stuck port data_in                                                              ;
+; MUX6to3_Result:MUX_Result_B|BCD_TO_SEGMENT_3_temp[3]                                    ; Merged with MUX6to3_Result:MUX_Result_B|BCD_TO_SEGMENT_3_temp[1]                                    ;
+; MUX6to3_Result:MUX_Result|BCD_TO_SEGMENT_3_temp[1,3]                                    ; Merged with MUX6to3_Result:MUX_Result_B|BCD_TO_SEGMENT_3_temp[1]                                    ;
+; SignDetectorPreview:SignDetectorPreviewB|BinaryAdderAndSubtractor:adder|FullAdder:FA0|s ; Merged with SignDetectorPreview:SignDetectorPreviewB|BinaryAdderAndSubtractor:adder|FullAdder:FA0|c ;
+; SignDetectorPreview:SignDetectorPreviewA|BinaryAdderAndSubtractor:adder|FullAdder:FA0|s ; Merged with SignDetectorPreview:SignDetectorPreviewA|BinaryAdderAndSubtractor:adder|FullAdder:FA0|c ;
+; FSM:FSM|current_state.GET_OPERATOR                                                      ; Lost fanout                                                                                         ;
+; BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|signal_integer2[2,3]          ; Stuck at GND due to stuck port data_in                                                              ;
+; BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|signal_integer2[2,3]          ; Stuck at GND due to stuck port data_in                                                              ;
+; BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|BCD_digit_2[2,3]              ; Stuck at GND due to stuck port data_in                                                              ;
+; BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|BCD_digit_2[2,3]              ; Stuck at GND due to stuck port data_in                                                              ;
+; MUX6to3_Result:MUX_Result|BCD_TO_SEGMENT_2_temp[2,3]                                    ; Stuck at GND due to stuck port data_in                                                              ;
+; MUX6to3_Result:MUX_Result_B|BCD_TO_SEGMENT_2_temp[2,3]                                  ; Stuck at GND due to stuck port data_in                                                              ;
+; BCDto7Segment:BCD_DIGIT_2_A|seven_seg[1]                                                ; Stuck at GND due to stuck port data_in                                                              ;
+; BCDto7Segment:BCD_DIGIT_2_B|seven_seg[1]                                                ; Stuck at GND due to stuck port data_in                                                              ;
+; Total Number of Removed Registers = 28                                                  ;                                                                                                     ;
++-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                                                          ;
++------------------------------------------------------------------------------+---------------------------+---------------------------------------------------------------------------+
+; Register name                                                                ; Reason for Removal        ; Registers Removed due to This Register                                    ;
++------------------------------------------------------------------------------+---------------------------+---------------------------------------------------------------------------+
+; BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|signal_integer2[2] ; Stuck at GND              ; BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|BCD_digit_2[2], ;
+;                                                                              ; due to stuck port data_in ; MUX6to3_Result:MUX_Result|BCD_TO_SEGMENT_2_temp[2],                       ;
+;                                                                              ;                           ; BCDto7Segment:BCD_DIGIT_2_A|seven_seg[1]                                  ;
+; BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|signal_integer2[2] ; Stuck at GND              ; BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|BCD_digit_2[2], ;
+;                                                                              ; due to stuck port data_in ; MUX6to3_Result:MUX_Result_B|BCD_TO_SEGMENT_2_temp[2],                     ;
+;                                                                              ;                           ; BCDto7Segment:BCD_DIGIT_2_B|seven_seg[1]                                  ;
+; BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|signal_integer2[3] ; Stuck at GND              ; BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|BCD_digit_2[3], ;
+;                                                                              ; due to stuck port data_in ; MUX6to3_Result:MUX_Result|BCD_TO_SEGMENT_2_temp[3]                        ;
+; BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|signal_integer2[3] ; Stuck at GND              ; BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|BCD_digit_2[3], ;
+;                                                                              ; due to stuck port data_in ; MUX6to3_Result:MUX_Result_B|BCD_TO_SEGMENT_2_temp[3]                      ;
+; BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|BCD_digit_3[2]     ; Stuck at GND              ; MUX6to3_Result:MUX_Result_B|BCD_TO_SEGMENT_3_temp[2]                      ;
+;                                                                              ; due to stuck port data_in ;                                                                           ;
+; BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|BCD_digit_3[2]     ; Stuck at GND              ; MUX6to3_Result:MUX_Result|BCD_TO_SEGMENT_3_temp[2]                        ;
+;                                                                              ; due to stuck port data_in ;                                                                           ;
++------------------------------------------------------------------------------+---------------------------+---------------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -257,23 +396,14 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 0     ;
+; Total registers                              ; 111   ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Clear ; 3     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Clock Enable       ; 10    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
-
-
-+-------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                  ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output        ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------+
-; 5:1                ; 2 bits    ; 6 LEs         ; 4 LEs                ; 2 LEs                  ; No         ; |CalculatorVHDL|FSM:FSM|Selector1 ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------+
 
 
 +--------------------------------------------------------------------------------+
@@ -293,6 +423,146 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+-------+-----------------------------+
 ; n              ; 5     ; Signed Integer              ;
 +----------------+-------+-----------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: SignDetectorPreview:SignDetectorPreviewA ;
++----------------+-------+--------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                         ;
++----------------+-------+--------------------------------------------------------------+
+; n              ; 5     ; Signed Integer                                               ;
++----------------+-------+--------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: SignDetectorPreview:SignDetectorPreviewA|BinaryAdderAndSubtractor:adder ;
++----------------+-------+---------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                        ;
++----------------+-------+---------------------------------------------------------------------------------------------+
+; n              ; 5     ; Signed Integer                                                                              ;
++----------------+-------+---------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: SignDetectorPreview:SignDetectorPreviewB ;
++----------------+-------+--------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                         ;
++----------------+-------+--------------------------------------------------------------+
+; n              ; 5     ; Signed Integer                                               ;
++----------------+-------+--------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: SignDetectorPreview:SignDetectorPreviewB|BinaryAdderAndSubtractor:adder ;
++----------------+-------+---------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                        ;
++----------------+-------+---------------------------------------------------------------------------------------------+
+; n              ; 5     ; Signed Integer                                                                              ;
++----------------+-------+---------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA ;
++----------------+-------+-------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                          ;
++----------------+-------+-------------------------------------------------------------------------------+
+; n              ; 5     ; Signed Integer                                                                ;
++----------------+-------+-------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB ;
++----------------+-------+-------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                          ;
++----------------+-------+-------------------------------------------------------------------------------+
+; n              ; 5     ; Signed Integer                                                                ;
++----------------+-------+-------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: MUX6to3_Result:MUX_Result ;
++----------------+-------+-----------------------------------------------+
+; Parameter Name ; Value ; Type                                          ;
++----------------+-------+-----------------------------------------------+
+; n              ; 5     ; Signed Integer                                ;
++----------------+-------+-----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: MUX6to3_Result:MUX_Result_B ;
++----------------+-------+-------------------------------------------------+
+; Parameter Name ; Value ; Type                                            ;
++----------------+-------+-------------------------------------------------+
+; n              ; 5     ; Signed Integer                                  ;
++----------------+-------+-------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: BCDto7Segment:BCD_DIGIT_1_A ;
++----------------+-------+-------------------------------------------------+
+; Parameter Name ; Value ; Type                                            ;
++----------------+-------+-------------------------------------------------+
+; n              ; 5     ; Signed Integer                                  ;
++----------------+-------+-------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: BCDto7Segment:BCD_DIGIT_2_A ;
++----------------+-------+-------------------------------------------------+
+; Parameter Name ; Value ; Type                                            ;
++----------------+-------+-------------------------------------------------+
+; n              ; 5     ; Signed Integer                                  ;
++----------------+-------+-------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: BCDto7Segment:BCD_DIGIT_3_A ;
++----------------+-------+-------------------------------------------------+
+; Parameter Name ; Value ; Type                                            ;
++----------------+-------+-------------------------------------------------+
+; n              ; 5     ; Signed Integer                                  ;
++----------------+-------+-------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: BCDto7Segment:BCD_DIGIT_1_B ;
++----------------+-------+-------------------------------------------------+
+; Parameter Name ; Value ; Type                                            ;
++----------------+-------+-------------------------------------------------+
+; n              ; 5     ; Signed Integer                                  ;
++----------------+-------+-------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: BCDto7Segment:BCD_DIGIT_2_B ;
++----------------+-------+-------------------------------------------------+
+; Parameter Name ; Value ; Type                                            ;
++----------------+-------+-------------------------------------------------+
+; n              ; 5     ; Signed Integer                                  ;
++----------------+-------+-------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: BCDto7Segment:BCD_DIGIT_3_B ;
++----------------+-------+-------------------------------------------------+
+; Parameter Name ; Value ; Type                                            ;
++----------------+-------+-------------------------------------------------+
+; n              ; 5     ; Signed Integer                                  ;
++----------------+-------+-------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -316,14 +586,265 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
++----------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: SignDetector:SignDetect_Adder ;
++----------------+-------+---------------------------------------------------+
+; Parameter Name ; Value ; Type                                              ;
++----------------+-------+---------------------------------------------------+
+; n              ; 5     ; Signed Integer                                    ;
++----------------+-------+---------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: SignDetector:SignDetect_Adder|BinaryAdderAndSubtractor:adder ;
++----------------+-------+----------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                             ;
++----------------+-------+----------------------------------------------------------------------------------+
+; n              ; 5     ; Signed Integer                                                                   ;
++----------------+-------+----------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: SignDetector:SignDetect_Subtractor ;
++----------------+-------+--------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                   ;
++----------------+-------+--------------------------------------------------------+
+; n              ; 5     ; Signed Integer                                         ;
++----------------+-------+--------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: SignDetector:SignDetect_Subtractor|BinaryAdderAndSubtractor:adder ;
++----------------+-------+---------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                  ;
++----------------+-------+---------------------------------------------------------------------------------------+
+; n              ; 5     ; Signed Integer                                                                        ;
++----------------+-------+---------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: BinaryToBCDConverterADD:BinaryToBCDConverter_Adder ;
++----------------+-------+------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                   ;
++----------------+-------+------------------------------------------------------------------------+
+; n              ; 5     ; Signed Integer                                                         ;
++----------------+-------+------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: BinaryToBCDConverterSUB:BinaryToBCDConverter_Subtractor ;
++----------------+-------+-----------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                        ;
++----------------+-------+-----------------------------------------------------------------------------+
+; n              ; 5     ; Signed Integer                                                              ;
++----------------+-------+-----------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|lpm_divide:Mod0 ;
++------------------------+----------------+----------------------------------------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                                                             ;
++------------------------+----------------+----------------------------------------------------------------------------------+
+; LPM_WIDTHN             ; 5              ; Untyped                                                                          ;
+; LPM_WIDTHD             ; 5              ; Untyped                                                                          ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                                                          ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                                                          ;
+; LPM_PIPELINE           ; 0              ; Untyped                                                                          ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                                                          ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                                                          ;
+; CBXI_PARAMETER         ; lpm_divide_akl ; Untyped                                                                          ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                                                          ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                                                          ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                                                       ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                                                     ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                                                     ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                                                   ;
++------------------------+----------------+----------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|lpm_divide:Div0 ;
++------------------------+----------------+----------------------------------------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                                                             ;
++------------------------+----------------+----------------------------------------------------------------------------------+
+; LPM_WIDTHN             ; 5              ; Untyped                                                                          ;
+; LPM_WIDTHD             ; 4              ; Untyped                                                                          ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                                                          ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                                                          ;
+; LPM_PIPELINE           ; 0              ; Untyped                                                                          ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                                                          ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                                                          ;
+; CBXI_PARAMETER         ; lpm_divide_6sl ; Untyped                                                                          ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                                                          ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                                                          ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                                                       ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                                                     ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                                                     ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                                                   ;
++------------------------+----------------+----------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|lpm_divide:Mod1 ;
++------------------------+----------------+----------------------------------------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                                                             ;
++------------------------+----------------+----------------------------------------------------------------------------------+
+; LPM_WIDTHN             ; 5              ; Untyped                                                                          ;
+; LPM_WIDTHD             ; 5              ; Untyped                                                                          ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                                                          ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                                                          ;
+; LPM_PIPELINE           ; 0              ; Untyped                                                                          ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                                                          ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                                                          ;
+; CBXI_PARAMETER         ; lpm_divide_akl ; Untyped                                                                          ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                                                          ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                                                          ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                                                       ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                                                     ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                                                     ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                                                   ;
++------------------------+----------------+----------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|lpm_divide:Mod0 ;
++------------------------+----------------+----------------------------------------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                                                             ;
++------------------------+----------------+----------------------------------------------------------------------------------+
+; LPM_WIDTHN             ; 5              ; Untyped                                                                          ;
+; LPM_WIDTHD             ; 5              ; Untyped                                                                          ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                                                          ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                                                          ;
+; LPM_PIPELINE           ; 0              ; Untyped                                                                          ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                                                          ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                                                          ;
+; CBXI_PARAMETER         ; lpm_divide_akl ; Untyped                                                                          ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                                                          ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                                                          ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                                                       ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                                                     ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                                                     ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                                                   ;
++------------------------+----------------+----------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|lpm_divide:Div0 ;
++------------------------+----------------+----------------------------------------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                                                             ;
++------------------------+----------------+----------------------------------------------------------------------------------+
+; LPM_WIDTHN             ; 5              ; Untyped                                                                          ;
+; LPM_WIDTHD             ; 4              ; Untyped                                                                          ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                                                          ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                                                          ;
+; LPM_PIPELINE           ; 0              ; Untyped                                                                          ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                                                          ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                                                          ;
+; CBXI_PARAMETER         ; lpm_divide_6sl ; Untyped                                                                          ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                                                          ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                                                          ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                                                       ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                                                     ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                                                     ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                                                   ;
++------------------------+----------------+----------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|lpm_divide:Mod1 ;
++------------------------+----------------+----------------------------------------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                                                             ;
++------------------------+----------------+----------------------------------------------------------------------------------+
+; LPM_WIDTHN             ; 5              ; Untyped                                                                          ;
+; LPM_WIDTHD             ; 5              ; Untyped                                                                          ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                                                          ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                                                          ;
+; LPM_PIPELINE           ; 0              ; Untyped                                                                          ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                                                          ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                                                          ;
+; CBXI_PARAMETER         ; lpm_divide_akl ; Untyped                                                                          ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                                                          ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                                                          ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                                                       ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                                                     ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                                                     ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                                                   ;
++------------------------+----------------+----------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "BinaryToBCDConverterSUB:BinaryToBCDConverter_Subtractor"                                   ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port        ; Type   ; Severity ; Details                                                                             ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; bcd_digit_1 ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; bcd_digit_2 ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; bcd_digit_3 ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "BinaryToBCDConverterADD:BinaryToBCDConverter_Adder"                                        ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port        ; Type   ; Severity ; Details                                                                             ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; bcd_digit_1 ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; bcd_digit_2 ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; bcd_digit_3 ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "SignDetector:SignDetect_Subtractor"                                                 ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; o    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "SignDetector:SignDetect_Adder|BinaryAdderAndSubtractor:adder"                          ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; Port    ; Type   ; Severity ; Details                                                                             ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; b[4..1] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; b[0]    ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; m       ; Input  ; Info     ; Stuck at GND                                                                        ;
+; enable  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; c       ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; v       ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "SignDetector:SignDetect_Adder"                                                      ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; o    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+
+
 +----------------------------------------------------------------------------------------------------------------+
 ; Port Connectivity Checks: "BinaryAdderAndSubtractor:Subtractor"                                                ;
 +------+--------+----------+-------------------------------------------------------------------------------------+
 ; Port ; Type   ; Severity ; Details                                                                             ;
 +------+--------+----------+-------------------------------------------------------------------------------------+
-; s    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; m    ; Input  ; Info     ; Stuck at VCC                                                                        ;
 ; c    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; v    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
 +------+--------+----------+-------------------------------------------------------------------------------------+
 
 
@@ -332,9 +853,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 +------+--------+----------+-------------------------------------------------------------------------------------+
 ; Port ; Type   ; Severity ; Details                                                                             ;
 +------+--------+----------+-------------------------------------------------------------------------------------+
-; s    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; m    ; Input  ; Info     ; Stuck at GND                                                                        ;
 ; c    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; v    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
 +------+--------+----------+-------------------------------------------------------------------------------------+
 
 
@@ -348,16 +868,75 @@ Note: In order to hide this table in the UI and the text report file, please set
 +------------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
++---------------------------------------------------------+
+; Port Connectivity Checks: "MUX6to3_Result:MUX_Result_B" ;
++---------------+-------+----------+----------------------+
+; Port          ; Type  ; Severity ; Details              ;
++---------------+-------+----------+----------------------+
+; bcd_digit_1_b ; Input ; Info     ; Stuck at GND         ;
+; bcd_digit_2_b ; Input ; Info     ; Stuck at GND         ;
+; bcd_digit_3_b ; Input ; Info     ; Stuck at GND         ;
++---------------+-------+----------+----------------------+
+
+
++-------------------------------------------------------+
+; Port Connectivity Checks: "MUX6to3_Result:MUX_Result" ;
++---------------+-------+----------+--------------------+
+; Port          ; Type  ; Severity ; Details            ;
++---------------+-------+----------+--------------------+
+; bcd_digit_1_b ; Input ; Info     ; Stuck at GND       ;
+; bcd_digit_2_b ; Input ; Info     ; Stuck at GND       ;
+; bcd_digit_3_b ; Input ; Info     ; Stuck at GND       ;
++---------------+-------+----------+--------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "SignDetectorPreview:SignDetectorPreviewA|BinaryAdderAndSubtractor:adder"               ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; Port    ; Type   ; Severity ; Details                                                                             ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; b[4..1] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; b[0]    ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; m       ; Input  ; Info     ; Stuck at GND                                                                        ;
+; enable  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; c       ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; v       ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "FSM:FSM"                                                                                        ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port             ; Type   ; Severity ; Details                                                                             ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; preview_operator ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
 +-----------------------------------------------------+
 ; Post-Synthesis Netlist Statistics for Top Partition ;
-+-------------------+---------------------------------+
-; Type              ; Count                           ;
-+-------------------+---------------------------------+
-; boundary_port     ; 13                              ;
-;                   ;                                 ;
-; Max LUT depth     ; 0.00                            ;
-; Average LUT depth ; 0.00                            ;
-+-------------------+---------------------------------+
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 55                          ;
+; cycloneiii_ff         ; 111                         ;
+;     CLR               ; 3                           ;
+;     ENA               ; 10                          ;
+;     plain             ; 98                          ;
+; cycloneiii_lcell_comb ; 147                         ;
+;     arith             ; 28                          ;
+;         2 data inputs ; 8                           ;
+;         3 data inputs ; 20                          ;
+;     normal            ; 119                         ;
+;         0 data inputs ; 9                           ;
+;         1 data inputs ; 9                           ;
+;         2 data inputs ; 52                          ;
+;         3 data inputs ; 14                          ;
+;         4 data inputs ; 35                          ;
+;                       ;                             ;
+; Max LUT depth         ; 5.70                        ;
+; Average LUT depth     ; 2.57                        ;
++-----------------------+-----------------------------+
 
 
 +-------------------------------+
@@ -365,7 +944,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:00     ;
+; Top            ; 00:00:01     ;
 +----------------+--------------+
 
 
@@ -375,58 +954,130 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Mon Oct 09 22:43:30 2023
+    Info: Processing started: Wed Oct 11 12:09:57 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off CalculatorVHDL -c CalculatorVHDL
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 12 of the 12 processors detected
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info (12021): Found 2 design units, including 1 entities, in source file signdetectorpreview.vhd
+    Info (12022): Found design unit 1: SignDetectorPreview-Structural File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/SignDetectorPreview.vhd Line: 14
+    Info (12023): Found entity 1: SignDetectorPreview File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/SignDetectorPreview.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file signdetector.vhd
+    Info (12022): Found design unit 1: SignDetector-Structural File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/SignDetector.vhd Line: 14
+    Info (12023): Found entity 1: SignDetector File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/SignDetector.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file operatorselector.vhd
-    Info (12022): Found design unit 1: OperatorSelector-Behavioral File: A:/Documents/GitHub/CalculatorVHDL/OperatorSelector.vhd Line: 13
-    Info (12023): Found entity 1: OperatorSelector File: A:/Documents/GitHub/CalculatorVHDL/OperatorSelector.vhd Line: 5
+    Info (12022): Found design unit 1: OperatorSelector-Behavioral File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/OperatorSelector.vhd Line: 13
+    Info (12023): Found entity 1: OperatorSelector File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/OperatorSelector.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file mux6to3_result.vhd
+    Info (12022): Found design unit 1: MUX6to3_Result-Behavioral File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/MUX6to3_Result.vhd Line: 21
+    Info (12023): Found entity 1: MUX6to3_Result File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/MUX6to3_Result.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file mux6to3_remainder.vhd
+    Info (12022): Found design unit 1: MUX6to3_Remainder-Behavioral File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/MUX6to3_Remainder.vhd Line: 21
+    Info (12023): Found entity 1: MUX6to3_Remainder File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/MUX6to3_Remainder.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file fulladder.vhd
-    Info (12022): Found design unit 1: Fulladder-Structural File: A:/Documents/GitHub/CalculatorVHDL/Fulladder.vhd Line: 10
-    Info (12023): Found entity 1: Fulladder File: A:/Documents/GitHub/CalculatorVHDL/Fulladder.vhd Line: 4
+    Info (12022): Found design unit 1: FullAdder-Structural File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/FullAdder.vhd Line: 10
+    Info (12023): Found entity 1: FullAdder File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/FullAdder.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file fsm.vhd
-    Info (12022): Found design unit 1: FSM-Behavioral File: A:/Documents/GitHub/CalculatorVHDL/FSM.vhd Line: 15
-    Info (12023): Found entity 1: FSM File: A:/Documents/GitHub/CalculatorVHDL/FSM.vhd Line: 4
-Info (12021): Found 2 design units, including 1 entities, in source file binaryadderandsubtractor.vhd
-    Info (12022): Found design unit 1: BinaryAdderAndSubtractor-Structural File: A:/Documents/GitHub/CalculatorVHDL/BinaryAdderAndSubtractor.vhd Line: 17
-    Info (12023): Found entity 1: BinaryAdderAndSubtractor File: A:/Documents/GitHub/CalculatorVHDL/BinaryAdderAndSubtractor.vhd Line: 6
+    Info (12022): Found design unit 1: FSM-Behavioral File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/FSM.vhd Line: 17
+    Info (12023): Found entity 1: FSM File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/FSM.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file calculatorvhdl.vhd
-    Info (12022): Found design unit 1: CalculatorVHDL-Structural File: A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 14
-    Info (12023): Found entity 1: CalculatorVHDL File: A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 5
+    Info (12022): Found design unit 1: CalculatorVHDL-Structural File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 14
+    Info (12023): Found entity 1: CalculatorVHDL File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file binarytobcdconvertersub.vhd
+    Info (12022): Found design unit 1: BinaryToBCDConverterSUB-Structural File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterSUB.vhd Line: 20
+    Info (12023): Found entity 1: BinaryToBCDConverterSUB File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterSUB.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file binarytobcdconverterpreviewb.vhd
+    Info (12022): Found design unit 1: BinaryToBCDConverterPreviewB-Structural File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterPreviewB.vhd Line: 19
+    Info (12023): Found entity 1: BinaryToBCDConverterPreviewB File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterPreviewB.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file binarytobcdconverterpreviewa.vhd
+    Info (12022): Found design unit 1: BinaryToBCDConverterPreviewA-Structural File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterPreviewA.vhd Line: 19
+    Info (12023): Found entity 1: BinaryToBCDConverterPreviewA File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterPreviewA.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file binarytobcdconverteradd.vhd
+    Info (12022): Found design unit 1: BinaryToBCDConverterADD-Structural File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterADD.vhd Line: 20
+    Info (12023): Found entity 1: BinaryToBCDConverterADD File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterADD.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file binaryadderandsubtractor.vhd
+    Info (12022): Found design unit 1: BinaryAdderAndSubtractor-Structural File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryAdderAndSubtractor.vhd Line: 17
+    Info (12023): Found entity 1: BinaryAdderAndSubtractor File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryAdderAndSubtractor.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file bcdto7segment.vhd
+    Info (12022): Found design unit 1: BCDto7Segment-data_process File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BCDto7Segment.vhd Line: 12
+    Info (12023): Found entity 1: BCDto7Segment File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BCDto7Segment.vhd Line: 4
 Info (12127): Elaborating entity "CalculatorVHDL" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at CalculatorVHDL.vhd(18): object "TRIG_MUL" assigned a value but never read File: A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 18
-Warning (10036): Verilog HDL or VHDL warning at CalculatorVHDL.vhd(18): object "TRIG_DIV" assigned a value but never read File: A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 18
-Warning (10036): Verilog HDL or VHDL warning at CalculatorVHDL.vhd(19): object "RESULT_ADDandSUB" assigned a value but never read File: A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 19
-Info (12129): Elaborating entity "FSM" using architecture "A:behavioral" for hierarchy "FSM:FSM" File: A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 23
-Info (12129): Elaborating entity "OperatorSelector" using architecture "A:behavioral" for hierarchy "OperatorSelector:OperatorSelector" File: A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 35
-Info (12129): Elaborating entity "BinaryAdderAndSubtractor" using architecture "A:structural" for hierarchy "BinaryAdderAndSubtractor:Adder" File: A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 46
-Warning (10541): VHDL Signal Declaration warning at BinaryAdderAndSubtractor.vhd(12): used implicit default value for signal "c" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: A:/Documents/GitHub/CalculatorVHDL/BinaryAdderAndSubtractor.vhd Line: 12
-Info (12128): Elaborating entity "Fulladder" for hierarchy "BinaryAdderAndSubtractor:Adder|Fulladder:FA0" File: A:/Documents/GitHub/CalculatorVHDL/BinaryAdderAndSubtractor.vhd Line: 27
-Info (17049): 3 registers lost all their fanouts during netlist optimizations.
+Warning (10540): VHDL Signal Declaration warning at CalculatorVHDL.vhd(15): used explicit default value for signal "z" because signal was never assigned a value File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 15
+Warning (10036): Verilog HDL or VHDL warning at CalculatorVHDL.vhd(22): object "TRIG_MUL" assigned a value but never read File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 22
+Warning (10036): Verilog HDL or VHDL warning at CalculatorVHDL.vhd(22): object "TRIG_DIV" assigned a value but never read File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 22
+Warning (10036): Verilog HDL or VHDL warning at CalculatorVHDL.vhd(27): object "SIGNDETECTED_ADD_RESULT" assigned a value but never read File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 27
+Warning (10036): Verilog HDL or VHDL warning at CalculatorVHDL.vhd(27): object "SIGNDETECTED_SUB_RESULT" assigned a value but never read File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 27
+Warning (10036): Verilog HDL or VHDL warning at CalculatorVHDL.vhd(31): object "SEG1_ADD" assigned a value but never read File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 31
+Warning (10036): Verilog HDL or VHDL warning at CalculatorVHDL.vhd(31): object "SEG2_ADD" assigned a value but never read File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 31
+Warning (10036): Verilog HDL or VHDL warning at CalculatorVHDL.vhd(31): object "SEG3_ADD" assigned a value but never read File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 31
+Warning (10036): Verilog HDL or VHDL warning at CalculatorVHDL.vhd(32): object "SEG1_SUB" assigned a value but never read File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 32
+Warning (10036): Verilog HDL or VHDL warning at CalculatorVHDL.vhd(32): object "SEG2_SUB" assigned a value but never read File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 32
+Warning (10036): Verilog HDL or VHDL warning at CalculatorVHDL.vhd(32): object "SEG3_SUB" assigned a value but never read File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 32
+Info (12129): Elaborating entity "FSM" using architecture "A:behavioral" for hierarchy "FSM:FSM" File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 43
+Info (12129): Elaborating entity "SignDetectorPreview" using architecture "A:structural" for hierarchy "SignDetectorPreview:SignDetectorPreviewA" File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 57
+Warning (10540): VHDL Signal Declaration warning at SignDetectorPreview.vhd(16): used explicit default value for signal "plusone" because signal was never assigned a value File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/SignDetectorPreview.vhd Line: 16
+Info (12129): Elaborating entity "BinaryAdderAndSubtractor" using architecture "A:structural" for hierarchy "SignDetectorPreview:SignDetectorPreviewA|BinaryAdderAndSubtractor:adder" File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/SignDetectorPreview.vhd Line: 19
+Warning (10541): VHDL Signal Declaration warning at BinaryAdderAndSubtractor.vhd(12): used implicit default value for signal "c" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryAdderAndSubtractor.vhd Line: 12
+Info (12128): Elaborating entity "FullAdder" for hierarchy "SignDetectorPreview:SignDetectorPreviewA|BinaryAdderAndSubtractor:adder|FullAdder:FA0" File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryAdderAndSubtractor.vhd Line: 26
+Warning (10492): VHDL Process Statement warning at FullAdder.vhd(14): signal "enable_fulladder" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/FullAdder.vhd Line: 14
+Info (12129): Elaborating entity "BinaryToBCDConverterPreviewA" using architecture "A:structural" for hierarchy "BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA" File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 73
+Info (12129): Elaborating entity "BinaryToBCDConverterPreviewB" using architecture "A:structural" for hierarchy "BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB" File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 83
+Info (12129): Elaborating entity "MUX6to3_Result" using architecture "A:behavioral" for hierarchy "MUX6to3_Result:MUX_Result" File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 93
+Info (12129): Elaborating entity "BCDto7Segment" using architecture "A:data_process" for hierarchy "BCDto7Segment:BCD_DIGIT_1_A" File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 124
+Info (12129): Elaborating entity "OperatorSelector" using architecture "A:behavioral" for hierarchy "OperatorSelector:OperatorSelector" File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 163
+Info (12129): Elaborating entity "SignDetector" using architecture "A:structural" for hierarchy "SignDetector:SignDetect_Adder" File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 196
+Warning (10540): VHDL Signal Declaration warning at SignDetector.vhd(16): used explicit default value for signal "plusone" because signal was never assigned a value File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/SignDetector.vhd Line: 16
+Info (12129): Elaborating entity "BinaryToBCDConverterADD" using architecture "A:structural" for hierarchy "BinaryToBCDConverterADD:BinaryToBCDConverter_Adder" File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 212
+Info (12129): Elaborating entity "BinaryToBCDConverterSUB" using architecture "A:structural" for hierarchy "BinaryToBCDConverterSUB:BinaryToBCDConverter_Subtractor" File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 222
+Info (278001): Inferred 6 megafunctions from design logic
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|Mod0" File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterPreviewA.vhd Line: 26
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|Div0" File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterPreviewA.vhd Line: 27
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|Mod1" File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterPreviewA.vhd Line: 27
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|Mod0" File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterPreviewB.vhd Line: 26
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|Div0" File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterPreviewB.vhd Line: 27
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "BinaryToBCDConverterPreviewB:BinaryToBCDConverterPreviewB|Mod1" File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterPreviewB.vhd Line: 27
+Info (12130): Elaborated megafunction instantiation "BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|lpm_divide:Mod0" File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterPreviewA.vhd Line: 26
+Info (12133): Instantiated megafunction "BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|lpm_divide:Mod0" with the following parameter: File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterPreviewA.vhd Line: 26
+    Info (12134): Parameter "LPM_WIDTHN" = "5"
+    Info (12134): Parameter "LPM_WIDTHD" = "5"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_akl.tdf
+    Info (12023): Found entity 1: lpm_divide_akl File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/db/lpm_divide_akl.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_9kh.tdf
+    Info (12023): Found entity 1: sign_div_unsign_9kh File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/db/sign_div_unsign_9kh.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_see.tdf
+    Info (12023): Found entity 1: alt_u_div_see File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/db/alt_u_div_see.tdf Line: 27
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_t3c.tdf
+    Info (12023): Found entity 1: add_sub_t3c File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/db/add_sub_t3c.tdf Line: 23
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_u3c.tdf
+    Info (12023): Found entity 1: add_sub_u3c File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/db/add_sub_u3c.tdf Line: 23
+Info (12130): Elaborated megafunction instantiation "BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|lpm_divide:Div0" File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterPreviewA.vhd Line: 27
+Info (12133): Instantiated megafunction "BinaryToBCDConverterPreviewA:BinaryToBCDConverterPreviewA|lpm_divide:Div0" with the following parameter: File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/BinaryToBCDConverterPreviewA.vhd Line: 27
+    Info (12134): Parameter "LPM_WIDTHN" = "5"
+    Info (12134): Parameter "LPM_WIDTHD" = "4"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_6sl.tdf
+    Info (12023): Found entity 1: lpm_divide_6sl File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/db/lpm_divide_6sl.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_8kh.tdf
+    Info (12023): Found entity 1: sign_div_unsign_8kh File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/db/sign_div_unsign_8kh.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_qee.tdf
+    Info (12023): Found entity 1: alt_u_div_qee File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/db/alt_u_div_qee.tdf Line: 27
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "SEVENSEG_DIGIT_2[1]" is stuck at GND File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 10
+    Warning (13410): Pin "SEVENSEG_DIGIT_5[1]" is stuck at GND File: C:/Users/ATOMIC_LAPTOP/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 10
+Info (286030): Timing-Driven Synthesis is running
+Info (17049): 1 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 13 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "SWITCHES[0]" File: A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 9
-    Warning (15610): No output dependent on input pin "SWITCHES[1]" File: A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 9
-    Warning (15610): No output dependent on input pin "SWITCHES[2]" File: A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 9
-    Warning (15610): No output dependent on input pin "SWITCHES[3]" File: A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 9
-    Warning (15610): No output dependent on input pin "SWITCHES[4]" File: A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 9
-    Warning (15610): No output dependent on input pin "SWITCHES[5]" File: A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 9
-    Warning (15610): No output dependent on input pin "SWITCHES[6]" File: A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 9
-    Warning (15610): No output dependent on input pin "SWITCHES[7]" File: A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 9
-    Warning (15610): No output dependent on input pin "SWITCHES[8]" File: A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 9
-    Warning (15610): No output dependent on input pin "SWITCHES[9]" File: A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 9
-    Warning (15610): No output dependent on input pin "Start" File: A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 8
-    Warning (15610): No output dependent on input pin "CLK" File: A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 8
-    Warning (15610): No output dependent on input pin "RST_N" File: A:/Documents/GitHub/CalculatorVHDL/CalculatorVHDL.vhd Line: 8
-Info (21057): Implemented 13 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 245 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 13 input pins
-    Info (21059): Implemented 0 output pins
+    Info (21059): Implemented 42 output pins
+    Info (21061): Implemented 190 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 19 warnings
-    Info: Peak virtual memory: 4787 megabytes
-    Info: Processing ended: Mon Oct 09 22:43:40 2023
-    Info: Elapsed time: 00:00:10
-    Info: Total CPU time (on all processors): 00:00:10
+    Info: Peak virtual memory: 4811 megabytes
+    Info: Processing ended: Wed Oct 11 12:10:14 2023
+    Info: Elapsed time: 00:00:17
+    Info: Total CPU time (on all processors): 00:00:18
 
 

@@ -1,6 +1,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
+use IEEE.std_logic_unsigned.all;
 
 entity multiplier is
     generic (N : integer := 5);
@@ -24,14 +25,14 @@ begin
             R <= result;
         elsif rising_edge(clk) then
             if enable = '1' then
-                multiplicand := unsigned("00000" & A); -- add 5 zeros to the left of multiplicand
+                multiplicand := STD_LOGIC_VECTOR("00000" & A); -- add 5 zeros to the left of multiplicand
                 multiplier := B;
                 
                 for i in 0 to N-1 loop
                     if multiplier(i) = '1' then -- if bit of multiplier is 1, add multiplicand to result. if 0, do nothing
-                        result := STD_LOGIC_VECTOR(result + signed(multiplicand));
+                        result := STD_LOGIC_VECTOR(result + multiplicand);
                     end if;
-                    multiplicand := shift_left(multiplicand, 1); -- shifts bit of mutiplicand to the left by one
+                    multiplicand := std_logic_vector(shift_left(unsigned(multiplicand), 1)); -- shifts bit of mutiplicand to the left by one
                 end loop;
                 
                 R <= result;
