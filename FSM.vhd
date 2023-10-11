@@ -8,7 +8,8 @@ ENTITY FSM IS
         switches : IN STD_LOGIC_VECTOR(2 * N - 1 DOWNTO 0);
         A_out, B_out : OUT STD_LOGIC_VECTOR (N - 1 DOWNTO 0);
         operator_out : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
-        done : OUT STD_LOGIC;
+        state_out : OUT STD_LOGIC_VECTOR;
+        done : OUT STD_LOGIC
     );
 END FSM;
 
@@ -35,10 +36,13 @@ BEGIN
                 WHEN GET_AandB =>
                     A_out <= switches(2 * N - 1 DOWNTO (2 * N - 1) - (N - 1));
                     B_out <= switches(N - 1 DOWNTO 0);
+                    state_out <= "00";
                 WHEN GET_OPERATOR =>
                     operator_out <= switches(1 DOWNTO 0);
+                    state_out <= "01";
                 WHEN FINISHED =>
                     done <= '1';
+                    state_out <= "10";
             END CASE;
         END IF;
     END PROCESS;

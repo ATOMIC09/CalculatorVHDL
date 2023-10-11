@@ -56,8 +56,8 @@
 
 --     -- Decode the current state to create the output
 --     -- if the current state is D, R is 1 otherwise R is 0
---     R <= ‘1’ WHEN State = D ELSE
---         ‘0’;
+--     R <= ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ1ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ WHEN State = D ELSE
+--         ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ0ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ;
 -- END rtl;
 -- TYPE State_type IS (A, B, C, D); -- the 4 different states
 -- SIGNAL State : State_Type; -- Create a signal that uses 
@@ -65,7 +65,7 @@
 
 -- PROCESS (clock, reset)
 -- BEGIN
---     IF (reset = ‘1’) THEN -- Upon reset, set the state to A
+--     IF (reset = ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ1ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ) THEN -- Upon reset, set the state to A
 --         State <= A;
 
 --     ELSIF rising_edge(clock) THEN
@@ -76,80 +76,76 @@
 --         END IF;
 --         WHEN OTHERS =>
 --         State <= A;
---         R <= ‘1’ WHEN State = D ELSE
---             ‘0’;
-
-
-
-
+--         R <= ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ1ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ WHEN State = D ELSE
+--             ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ0ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ;
 -- Old Multiply
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.NUMERIC_STD.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.NUMERIC_STD.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
-entity Multiplier is
-    generic (
-        n : integer := 5
+ENTITY Yeet IS
+    GENERIC (
+        n : INTEGER := 5
     );
-    Port (
-        clk : in STD_LOGIC;
-        enable : in STD_LOGIC; -- will be used to enable the multiplier
-        A : in STD_LOGIC_VECTOR(n-1 downto 0);
-        B : in STD_LOGIC_VECTOR(n-1 downto 0);
-        result : out STD_LOGIC_VECTOR(2*n-1 downto 0); -- 2n bit result of multiplication
-        calDONE : out STD_LOGIC -- will be used to indicate that the multiplication is done
+    PORT (
+        clk : IN STD_LOGIC;
+        enable : IN STD_LOGIC; -- will be used to enable the Yeet
+        A : IN STD_LOGIC_VECTOR(n - 1 DOWNTO 0);
+        B : IN STD_LOGIC_VECTOR(n - 1 DOWNTO 0);
+        result : OUT STD_LOGIC_VECTOR(2 * n - 1 DOWNTO 0); -- 2n bit result of multiplication
+        calDONE : OUT STD_LOGIC -- will be used to indicate that the multiplication is done
     );
-end Multiplier;
+END Yeet;
 
-architecture Behavioral of Multiplier is
-    type listState is (s0,s1);
-    signal state : listState := s0;
-    signal count : integer := 0;
-    signal Data_A : STD_LOGIC_VECTOR(2*n-1 downto 0) := (others => '0');
-    signal Data_B : STD_LOGIC_VECTOR(n-1 downto 0) := (others => '0');
-    signal Data_Product : STD_LOGIC_VECTOR(2*n-1 downto 0) := (others => '0');
+ARCHITECTURE Behavioral OF Yeet IS
+    TYPE listState IS (s0, s1);
+    SIGNAL state : listState := s0;
+    SIGNAL count : INTEGER := 0;
+    SIGNAL Data_A : STD_LOGIC_VECTOR(2 * n - 1 DOWNTO 0) := (OTHERS => '0');
+    SIGNAL Data_B : STD_LOGIC_VECTOR(n - 1 DOWNTO 0) := (OTHERS => '0');
+    SIGNAL Data_Product : STD_LOGIC_VECTOR(2 * n - 1 DOWNTO 0) := (OTHERS => '0');
 
-begin
-    process (enable, clk)
-    begin
-        if rising_edge(clk) then
-            case state is
-                when s0 =>
-                    if enable = '1' then
-                        Data_A (n-1 downto 0) <= A; -- keep data A
+BEGIN
+    PROCESS (enable, clk)
+    BEGIN
+        IF rising_edge(clk) THEN
+            CASE state IS
+                WHEN s0 =>
+                    IF enable = '1' THEN
+                        Data_A (n - 1 DOWNTO 0) <= A; -- keep data A
                         Data_B <= B; -- keep data B
                         state <= s1;
-                    else
+                    ELSE
                         state <= s0;
                         calDONE <= '0';
-                    end if;
+                    END IF;
 
-                when s1 =>
-                    if count < n+1 then
+                WHEN s1 =>
+                    IF count < n + 1 THEN
                         state <= s1;
-                        if (Data_B(count) = '1') then
+                        IF (Data_B(count) = '1') THEN
                             Data_Product <= Data_Product + Data_A; -- plus one then shift
-                            Data_A <= std_logic_vector(shift_left(unsigned(Data_A),1)); -- shift data_a to the left by one bit
+                            Data_A <= STD_LOGIC_VECTOR(shift_left(unsigned(Data_A), 1)); -- shift data_a to the left by one bit
                             result <= Data_Product;
                             count <= count + 1;
-                        else -- no plus one then shift
-                            Data_A <= std_logic_vector(shift_left(unsigned(Data_A),1));
+                        ELSE -- no plus one then shift
+                            Data_A <= STD_LOGIC_VECTOR(shift_left(unsigned(Data_A), 1));
                             result <= Data_Product;
                             count <= count + 1;
-                        end if;
-                    else
+                        END IF;
+                    ELSE
                         count <= 0;
-                        Data_Product <= (others => '0');
-                        Data_A <= (others => '0');
-                        Data_B <= (others => '0');
+                        Data_Product <= (OTHERS => '0');
+                        Data_A <= (OTHERS => '0');
+                        Data_B <= (OTHERS => '0');
                         state <= s0;
                         calDONE <= '1';
-                    end if;
-                when others =>
+                    END IF;
+                WHEN OTHERS =>
                     state <= s0;
-            end case;
-        end if;
-    end process;
+            END CASE;
+        END IF;
+    END PROCESS;
 
-end Behavioral;
+END Behavioral;

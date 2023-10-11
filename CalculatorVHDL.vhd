@@ -18,6 +18,7 @@ signal z : std_logic_vector(N - 2 downto 0) := (others => '0');
     SIGNAL SIGNDETECTED_A_PREVIEW, SIGNDETECTED_B_PREVIEW : STD_LOGIC_VECTOR(N - 1 DOWNTO 0) := (others => '0');
 
     SIGNAL STORE_OPERATOR : STD_LOGIC_VECTOR(1 DOWNTO 0) := (others => '0');
+    SIGNAL STORE_STATE : STD_LOGIC_VECTOR(1 DOWNTO 0) := (others => '0');
     SIGNAL DONE : STD_LOGIC := '0';
     SIGNAL TRIG_ADD, TRIG_SUB, TRIG_MUL, TRIG_DIV : STD_LOGIC := '0';
     SIGNAL RESULT_ADD, RESULT_SUB : STD_LOGIC_VECTOR(N - 1 DOWNTO 0) := (others => '0');
@@ -34,6 +35,7 @@ signal z : std_logic_vector(N - 2 downto 0) := (others => '0');
     SIGNAL SEG1_DIV, SEG2_DIV, SEG3_DIV, SEG4_DIV, SEG5_DIV, SEG6_DIV : STD_LOGIC_VECTOR(N-2 DOWNTO 0) := (others => '0');
     SIGNAL SEG1_A, SEG2_A, SEG3_A : STD_LOGIC_VECTOR(N-2 DOWNTO 0) := (others => '0');
     SIGNAL SEG1_B, SEG2_B, SEG3_B : STD_LOGIC_VECTOR(N-2 DOWNTO 0) := (others => '0');
+    SIGNAL SEG1_O : STD_LOGIC_VECTOR(N-2 DOWNTO 0) := (others => '0');
 
     -- SIGNAL Between MUX and 7 Segment (Digit 4 bits)
     SIGNAL SEG1_A_BCDto7SEG, SEG2_A_BCDto7SEG, SEG3_A_BCDto7SEG : STD_LOGIC_VECTOR(N-2 DOWNTO 0) := (others => '0');
@@ -48,10 +50,9 @@ BEGIN
             switches => SWITCHES,
             A_out => STORE_A,
             B_out => STORE_B,
+            state_out => STORE_STATE,
             operator_out => STORE_OPERATOR,
-            done => DONE,
-            preview_A => PREVIEW_A,
-            preview_B => PREVIEW_B
+            done => DONE
         );
 
     SignDetectorPreviewA : ENTITY work.SignDetectorPreview(Structural)
@@ -89,35 +90,49 @@ BEGIN
             BCD_digit_2 => SEG2_B,
             BCD_digit_3 => SEG3_B  
         );
-
-    MUX_Result : ENTITY work.MUX6to3_Result(Behavioral)
+    BinaryToBCDConverterPreviewOperator : ENTITY work.BinaryToBCDConverterPreviewOperator(Structural)
         PORT MAP(
             clk => CLK,
-            control => DONE,
+            data => STORE_OPERATOR,
+            BCD_digit_1 => SEG1_O
+        );
+
+    MUX_Result : ENTITY work.MUX9to3_Result(Behavioral)
+        PORT MAP(
+            clk => CLK,
+            control => STORE_STATE,
+            operate => STORE_OPERATOR,
             BCD_digit_1_A => SEG1_A,
             BCD_digit_2_A => SEG2_A,
             BCD_digit_3_A => SEG3_A,
-            BCD_digit_1_B => z,
-            BCD_digit_2_B => z,
-            BCD_digit_3_B => z,
+            BCD_digit_1_B => SEG1_O,
+            BCD_digit_2_B => SEG1_O,
+            BCD_digit_3_B => SEG1_O,
+            BCD_digit_1_C => SEG1_,
+            BCD_digit_2_C => SEG2_,
+            BCD_digit_3_C => SEG3_,
             BCD_TO_SEGMENT_1 => SEG1_A_BCDto7SEG,
             BCD_TO_SEGMENT_2 => SEG2_A_BCDto7SEG,
             BCD_TO_SEGMENT_3 => SEG3_A_BCDto7SEG
         );
 
-    MUX_Result_B : ENTITY work.MUX6to3_Result(Behavioral)
+    MUX_Remainder : ENTITY work.MUX9to3_Remainder(Behavioral)
         PORT MAP(
             clk => CLK,
-            control => DONE,
+            control => STORE_STATE,
+            -- operate => STORE_OPERATOR,
             BCD_digit_1_A => SEG1_B,
             BCD_digit_2_A => SEG2_B,
             BCD_digit_3_A => SEG3_B,
-            BCD_digit_1_B => z,
-            BCD_digit_2_B => z,
-            BCD_digit_3_B => z,
-            BCD_TO_SEGMENT_1 => SEG1_B_BCDto7SEG,
-            BCD_TO_SEGMENT_2 => SEG2_B_BCDto7SEG,
-            BCD_TO_SEGMENT_3 => SEG3_B_BCDto7SEG
+            BCD_digit_1_B => SEG1_O,
+            BCD_digit_2_B => SEG1_O,
+            BCD_digit_3_B => SEG1_O,
+            BCD_digit_1_C => SEG1_,
+            BCD_digit_2_C => SEG2_,
+            BCD_digit_3_C => SEG3_,
+            BCD_TO_SEGMENT_1 => SEG1_A_BCDto7SEG,
+            BCD_TO_SEGMENT_2 => SEG2_A_BCDto7SEG,
+            BCD_TO_SEGMENT_3 => SEG3_A_BCDto7SEG
         );
 
     -- Preview A

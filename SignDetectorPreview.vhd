@@ -20,10 +20,10 @@ BEGIN
         PORT MAP(
             a => zero, b => s_detect, m => '1', clock => clk, enable => '1', s => complemented -- complemented is the output of the adders
         );
-    );
 
     minus <= s_detect(N - 1);
 
     WITH s_detect(N - 1) SELECT -- Detect MSB
     o <= s_detect WHEN '0', -- If MSB is 0, output is s_detect
         complemented WHEN OTHERS; -- If MSB is 1, output is complemented
+END ARCHITECTURE;
