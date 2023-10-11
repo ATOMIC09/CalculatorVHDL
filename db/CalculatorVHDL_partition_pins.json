@@ -36,6 +36,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "SEVENSEG_DIGIT_2[1]",
+					"strict" : false
+				},
+				{
 					"name" : "SEVENSEG_DIGIT_2[2]",
 					"strict" : false
 				},
@@ -116,6 +120,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "SEVENSEG_DIGIT_5[1]",
+					"strict" : false
+				},
+				{
 					"name" : "SEVENSEG_DIGIT_5[2]",
 					"strict" : false
 				},
@@ -168,7 +176,15 @@
 					"strict" : false
 				},
 				{
+					"name" : "SWITCHES[0]",
+					"strict" : false
+				},
+				{
 					"name" : "RST_N",
+					"strict" : false
+				},
+				{
+					"name" : "SWITCHES[1]",
 					"strict" : false
 				},
 				{
@@ -188,27 +204,19 @@
 					"strict" : false
 				},
 				{
-					"name" : "SWITCHES[6]",
-					"strict" : false
-				},
-				{
 					"name" : "SWITCHES[8]",
 					"strict" : false
 				},
 				{
-					"name" : "SWITCHES[7]",
-					"strict" : false
-				},
-				{
-					"name" : "SWITCHES[0]",
-					"strict" : false
-				},
-				{
-					"name" : "SWITCHES[1]",
-					"strict" : false
-				},
-				{
 					"name" : "SWITCHES[3]",
+					"strict" : false
+				},
+				{
+					"name" : "SWITCHES[6]",
+					"strict" : false
+				},
+				{
+					"name" : "SWITCHES[7]",
 					"strict" : false
 				},
 				{

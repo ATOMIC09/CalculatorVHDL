@@ -10,9 +10,6 @@ entity MUX9to3_Result is
         BCD_digit_1_B : in std_logic_vector(N-2 downto 0);
         BCD_digit_2_B : in std_logic_vector(N-2 downto 0);
         BCD_digit_3_B : in std_logic_vector(N-2 downto 0);
-        BCD_digit_1_C : in std_logic_vector(N-2 downto 0);
-        BCD_digit_2_C : in std_logic_vector(N-2 downto 0);
-        BCD_digit_3_C : in std_logic_vector(N-2 downto 0);
 
         BCD_digit_1_ADD : in std_logic_vector(N-2 downto 0);
         BCD_digit_2_ADD : in std_logic_vector(N-2 downto 0);

@@ -1,12 +1,12 @@
-Analysis & Synthesis Status : Successful - Wed Oct 11 12:10:14 2023
+Analysis & Synthesis Status : Successful - Wed Oct 11 19:00:26 2023
 Quartus Prime Version : 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 Revision Name : CalculatorVHDL
 Top-level Entity Name : CalculatorVHDL
 Family : MAX 10
-Total logic elements : 186
-    Total combinational functions : 146
-    Dedicated logic registers : 111
-Total registers : 111
+Total logic elements : 342
+    Total combinational functions : 304
+    Dedicated logic registers : 175
+Total registers : 175
 Total pins : 55
 Total virtual pins : 0
 Total memory bits : 0
