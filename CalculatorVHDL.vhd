@@ -14,7 +14,7 @@ END CalculatorVHDL;
 ARCHITECTURE Structural OF CalculatorVHDL IS
 signal z : std_logic_vector(N - 2 downto 0) := (others => '0');
     SIGNAL STORE_A, STORE_B : STD_LOGIC_VECTOR(N - 1 DOWNTO 0) := (others => '0');
-    SIGNAL PREVIEW_A, PREVIEW_B : STD_LOGIC_VECTOR(N - 1 DOWNTO 0) := (others => '0');
+    -- SIGNAL PREVIEW_A, PREVIEW_B : STD_LOGIC_VECTOR(N - 1 DOWNTO 0) := (others => '0');
     SIGNAL SIGNDETECTED_A_PREVIEW, SIGNDETECTED_B_PREVIEW : STD_LOGIC_VECTOR(N - 1 DOWNTO 0) := (others => '0');
 
     SIGNAL STORE_OPERATOR : STD_LOGIC_VECTOR(1 DOWNTO 0) := (others => '0');
@@ -43,8 +43,8 @@ BEGIN
     FSM : ENTITY work.FSM(Behavioral)
         PORT MAP(
             clk => CLK,
-            rst_n => RST_N,
-            start => Start,
+            rst_n => NOT RST_N,
+            start => NOT Start,
             switches => SWITCHES,
             A_out => STORE_A,
             B_out => STORE_B,
@@ -56,7 +56,7 @@ BEGIN
 
     SignDetectorPreviewA : ENTITY work.SignDetectorPreview(Structural)
         PORT MAP(
-            s_detect => PREVIEW_A,
+            s_detect => STORE_A,
             clk => CLK,
             minus => MINUS_PREVIEW_A,
             o => SIGNDETECTED_A_PREVIEW
@@ -64,7 +64,7 @@ BEGIN
 
     SignDetectorPreviewB : ENTITY work.SignDetectorPreview(Structural)
         PORT MAP(
-            s_detect => PREVIEW_B,
+            s_detect => STORE_B,
             clk => CLK,
             minus => MINUS_PREVIEW_B,
             o => SIGNDETECTED_B_PREVIEW

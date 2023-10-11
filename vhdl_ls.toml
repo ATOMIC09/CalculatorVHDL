@@ -4,22 +4,5 @@
 [libraries]
 
 lib1.files = [
-  'CalculatorVHDL.vhd',
-  'FSM.vhd',
-  'FullAdder.vhd',
-  'BinaryAdderAndSubtractor.vhd',
-  'OperatorSelector.vhd',
-  'Multiplier.vhd',
-  'Divider.vhd',
-  'SignDetector.vhd',
-  'SignDetectorPreview.vhd',
-  'BinaryToBCDConverterADD.vhd',
-  'BinaryToBCDConverterSUB.vhd',
-  'BinaryToBCDConverterMUL.vhd',
-  'BinaryToBCDConverterDIV.vhd',
-  'BCDto7Segment.vhd',
-  'BinaryToBCDConverterPreviewA.vhd',
-  'BinaryToBCDConverterPreviewB.vhd',
-  'MUX6to3_Resullt.vhd',
-  'MUX6to3_Remainder.vhd'
+  '*.vhd'
 ]
