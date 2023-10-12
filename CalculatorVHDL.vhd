@@ -131,69 +131,70 @@ BEGIN
             clk => CLK,
             control => STORE_STATE,
             operate => STORE_OPERATOR,
-            BCD_digit_1_A => SEG1_B,
-            BCD_digit_2_A => SEG2_B,
-            BCD_digit_3_A => SEG3_B,
-            BCD_digit_1_B => SEG1_O,
-            BCD_digit_2_B => SEG1_O,
-            BCD_digit_3_B => SEG1_O,
-            BCD_digit_1_ADD => "1011",
-            BCD_digit_2_ADD => "1011",
-            BCD_digit_3_ADD => "1011",
-            BCD_digit_1_SUB => "1011",
-            BCD_digit_2_SUB => "1011",
-            BCD_digit_3_SUB => "1011",
-            BCD_digit_1_MUL => "1011",
-            BCD_digit_2_MUL => "1011",
-            BCD_digit_3_MUL => "1011",
-            BCD_digit_1_DIV => SEG1_DIV,
-            BCD_digit_2_DIV => SEG2_DIV,
-            BCD_digit_3_DIV => SEG3_DIV,
-            BCD_TO_SEGMENT_1 => SEG1_B_BCDto7SEG,
-            BCD_TO_SEGMENT_2 => SEG2_B_BCDto7SEG,
-            BCD_TO_SEGMENT_3 => SEG3_B_BCDto7SEG
+            BCD_digit_4_A => SEG1_B,
+            BCD_digit_5_A => SEG2_B,
+            BCD_digit_6_A => SEG3_B,
+            BCD_digit_4_B => SEG1_O,
+            BCD_digit_5_B => SEG1_O,
+            BCD_digit_6_B => SEG1_O,
+            BCD_digit_4_ADD => "1011",
+            BCD_digit_5_ADD => "1011",
+            BCD_digit_6_ADD => "1011",
+            BCD_digit_4_SUB => "1011",
+            BCD_digit_5_SUB => "1011",
+            BCD_digit_6_SUB => "1011",
+            BCD_digit_4_MUL => "1011",
+            BCD_digit_5_MUL => "1011",
+            BCD_digit_6_MUL => "1011",
+            BCD_digit_4_DIV => SEG1_DIV,
+            BCD_digit_5_DIV => SEG2_DIV,
+            BCD_digit_6_DIV => SEG3_DIV,
+            BCD_TO_SEGMENT_4 => SEG1_B_BCDto7SEG,
+            BCD_TO_SEGMENT_5 => SEG2_B_BCDto7SEG,
+            BCD_TO_SEGMENT_6 => SEG3_B_BCDto7SEG
         );
 
-    -- Preview A
-    BCD_DIGIT_1_A : ENTITY work.BCDto7Segment(data_process)
-        PORT MAP(
-            BCD_i => SEG1_A_BCDto7SEG,
-            clk_i => CLK,
-            seven_seg => SEVENSEG_DIGIT_1
-        );
-    BCD_DIGIT_2_A : ENTITY work.BCDto7Segment(data_process)
-        PORT MAP(
-            BCD_i => SEG2_A_BCDto7SEG,
-            clk_i => CLK,
-            seven_seg => SEVENSEG_DIGIT_2
-        );
-    BCD_DIGIT_3_A : ENTITY work.BCDto7Segment(data_process)
-        PORT MAP(
-            BCD_i => SEG3_A_BCDto7SEG,
-            clk_i => CLK,
-            seven_seg => SEVENSEG_DIGIT_3
-        );
+    -- -- Preview A
+    -- BCD_DIGIT_1_A : ENTITY work.BCDto7Segment(data_process)
+    --     PORT MAP(
+    --         BCD_i => SEG1_A_BCDto7SEG,
+    --         clk_i => CLK,
+    --         seven_seg => SEVENSEG_DIGIT_1
+    --     );
+    -- BCD_DIGIT_2_A : ENTITY work.BCDto7Segment(data_process)
+    --     PORT MAP(
+    --         BCD_i => SEG2_A_BCDto7SEG,
+    --         clk_i => CLK,
+    --         seven_seg => SEVENSEG_DIGIT_2
+    --     );
+    -- BCD_DIGIT_3_A : ENTITY work.BCDto7Segment(data_process)
+    --     PORT MAP(
+    --         BCD_i => SEG3_A_BCDto7SEG,
+    --         clk_i => CLK,
+    --         seven_seg => SEVENSEG_DIGIT_3
+    --     );
 
-    -- Preview B
-    BCD_DIGIT_1_B : ENTITY work.BCDto7Segment(data_process)
-        PORT MAP(
-            BCD_i => SEG1_B_BCDto7SEG,
-            clk_i => CLK,
-            seven_seg => SEVENSEG_DIGIT_4
-        );
-    BCD_DIGIT_2_B : ENTITY work.BCDto7Segment(data_process)
-        PORT MAP(
-            BCD_i => SEG2_B_BCDto7SEG,
-            clk_i => CLK,
-            seven_seg => SEVENSEG_DIGIT_5
-        );
-    BCD_DIGIT_3_B : ENTITY work.BCDto7Segment(data_process)
-        PORT MAP(
-            BCD_i => SEG3_B_BCDto7SEG,
-            clk_i => CLK,
-            seven_seg => SEVENSEG_DIGIT_6
-        );
+    -- -- Preview B
+    -- BCD_DIGIT_1_B : ENTITY work.BCDto7Segment(data_process)
+    --     PORT MAP(
+    --         BCD_i => SEG1_B_BCDto7SEG,
+    --         clk_i => CLK,
+    --         seven_seg => SEVENSEG_DIGIT_4
+    --     );
+    -- BCD_DIGIT_2_B : ENTITY work.BCDto7Segment(data_process)
+    --     PORT MAP(
+    --         BCD_i => SEG2_B_BCDto7SEG,
+    --         clk_i => CLK,
+    --         seven_seg => SEVENSEG_DIGIT_5
+    --     );
+    -- BCD_DIGIT_3_B : ENTITY work.BCDto7Segment(data_process)
+    --     PORT MAP(
+    --         BCD_i => SEG3_B_BCDto7SEG,
+    --         clk_i => CLK,
+    --         seven_seg => SEVENSEG_DIGIT_6
+    --     );
 
+    -- operator selection and operations calculate unit
     OperatorSelector : ENTITY work.OperatorSelector(Behavioral)
         PORT MAP(
             clk => CLK,
@@ -226,7 +227,18 @@ BEGIN
             s => RESULT_SUB,
             v => V_SUB
         );
+    
+    Multiplier : ENTITY work.BinaryMultiplier(Behavioral)
+        PORT MAP(
+            clk => CLK,
+            enable => TRIG_SUB,
+            reset => NOT RST_N,
+            A => STORE_A,
+            B => STORE_B,
+            R => RESULT_MUL
+        );
 
+    -- sign detector (for add and subtract)
     SignDetect_Adder : ENTITY work.SignDetector(Structural)
         PORT MAP(
             s_detect => RESULT_ADD,
@@ -243,6 +255,7 @@ BEGIN
             o => SIGNDETECTED_SUB_RESULT
         );
 
+    -- Result (binary) to BCD conversions
     BinaryToBCDConverter_Adder : ENTITY work.BinaryToBCDConverterADD(Structural)
         PORT MAP(
             clk => CLK,
@@ -263,25 +276,52 @@ BEGIN
             BCD_digit_2 => SEG2_SUB,
             BCD_digit_3 => SEG3_SUB
         );
+    BinaryToBCDConverter_Multiplier : ENTITY work.BinaryToBCDConverterMUL(Structural)
+        PORT MAP(
+            clk => CLK,
+            minus_con => STORE_A(N-1) XOR STORE_B(N-1),
+            data => RESULT_MUL,
+            BCD_digit_1 => SEG1_MUL,
+            BCD_digit_2 => SEG2_MUL,
+            BCD_digit_3 => SEG3_MUL
+        );
 
-    -- -- Adder
-    -- BCD_DIGIT_1 : ENTITY work.BCDto7Segment(data_process)
-    --     PORT MAP(
-    --         BCD_i => SEG1_ADD,
-    --         clk_i => CLK,
-    --         seven_seg => SEVENSEG_DIGIT_1 -- logic vector 7 bit
-    --     );
-    -- BCD_DIGIT_2 : ENTITY work.BCDto7Segment(data_process)
-    --     PORT MAP(
-    --         BCD_i => SEG2_ADD,
-    --         clk_i => CLK,
-    --         seven_seg => SEVENSEG_DIGIT_2
-    --     );
-    -- BCD_DIGIT_3 : ENTITY work.BCDto7Segment(data_process)
-    --     PORT MAP(
-    --         BCD_i => SEG3_ADD,
-    --         clk_i => CLK,
-    --         seven_seg => SEVENSEG_DIGIT_3
-    --     );
+    -- BCD Result showing
+    BCD_DIGIT_1 : ENTITY work.BCDto7Segment(data_process)
+        PORT MAP(
+            BCD_i => SEG1_A_BCDto7SEG,
+            clk_i => CLK,
+            seven_seg => SEVENSEG_DIGIT_1
+        );
+    BCD_DIGIT_2 : ENTITY work.BCDto7Segment(data_process)
+        PORT MAP(
+            BCD_i => SEG2_A_BCDto7SEG,
+            clk_i => CLK,
+            seven_seg => SEVENSEG_DIGIT_2
+        );
+    BCD_DIGIT_3 : ENTITY work.BCDto7Segment(data_process)
+        PORT MAP(
+            BCD_i => SEG3_A_BCDto7SEG,
+            clk_i => CLK,
+            seven_seg => SEVENSEG_DIGIT_3
+        );
+    BCD_DIGIT_4 : ENTITY work.BCDto7Segment(data_process)
+        PORT MAP(
+            BCD_i => SEG1_B_BCDto7SEG,
+            clk_i => CLK,
+            seven_seg => SEVENSEG_DIGIT_4
+        );
+    BCD_DIGIT_5 : ENTITY work.BCDto7Segment(data_process)
+        PORT MAP(
+            BCD_i => SEG2_B_BCDto7SEG,
+            clk_i => CLK,
+            seven_seg => SEVENSEG_DIGIT_5
+        );
+    BCD_DIGIT_6 : ENTITY work.BCDto7Segment(data_process)
+        PORT MAP(
+            BCD_i => SEG3_B_BCDto7SEG,
+            clk_i => CLK,
+            seven_seg => SEVENSEG_DIGIT_6
+        );
 
 END Structural;
