@@ -1,50 +1,52 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.STD_LOGIC_ARITH.all;
+-- LIBRARY ieee;
+-- USE ieee.std_logic_1164.ALL;
+-- USE ieee.STD_LOGIC_ARITH.ALL;
 
-entity BinaryToBCDConverterDIV is
-    generic(
-        N : integer := 5
-    );
-    port(
-        clk: in std_logic;
-        v: in std_logic;
-        minus_con: in std_logic;
-        data_result: in std_logic_vector(2*N-1 downto 0);
-        data_remainder: in std_logic_vector(N-1 downto 0);
-        BCD_digit_1 : out std_logic_vector(N-2 downto 0);
-        BCD_digit_2 : out std_logic_vector(N-2 downto 0);
-        BCD_digit_3 : out std_logic_vector(N-2 downto 0);
-        BCD_digit_4 : out std_logic_vector(N-2 downto 0);
-        BCD_digit_5 : out std_logic_vector(N-2 downto 0);
-        BCD_digit_6 : out std_logic_vector(N-2 downto 0)
-    );
-end BinaryToBCDConverterDIV;
+-- ENTITY BinaryToBCDConverterDIV IS
+--     GENERIC (
+--         N : INTEGER := 5
+--     );
+--     PORT (
+--         clk : IN STD_LOGIC;
+--         minus_q : IN STD_LOGIC;   
+--         minus_r : IN STD_LOGIC;  
+--         data_q : IN STD_LOGIC_VECTOR(2 * N - 1 DOWNTO 0);
+--         data_r : IN STD_LOGIC_VECTOR(2 * N - 1 DOWNTO 0);
+--         BCD_digit_1 : OUT STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+--         BCD_digit_2 : OUT STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+--         BCD_digit_3 : OUT STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+--         BCD_digit_4 : OUT STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+--         BCD_digit_5 : OUT STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+--         BCD_digit_6 : OUT STD_LOGIC_VECTOR(N - 2 DOWNTO 0)
+--     );
+-- END BinaryToBCDConverterDIV;
 
-architecture Structural of BinaryToBCDConverterDIV is
-signal signal_integer1 : integer := 0;
-signal signal_integer2 : integer := 0;
-begin
-    process(clk)
-        begin 
-            if rising_edge(clk) then
-                if v = '1' then
-                    BCD_digit_1 <= "1101";
-                    BCD_digit_2 <= "1101";
-                    BCD_digit_3 <= "1100";
-                else
-                    signal_integer1 <=  conv_integer(unsigned(data)) MOD 10;
-                    signal_integer2 <=  (conv_integer(unsigned(data)) / 10) MOD 10;
+-- ARCHITECTURE Structural OF BinaryToBCDConverterDIV IS
+--     -- signal integer quotient
+--     SIGNAL signal_integer1 : INTEGER := 0;
+--     SIGNAL signal_integer2 : INTEGER := 0;
+--     -- signal integer remainder
+--     SIGNAL signal_integer3 : INTEGER := 0;
+--     SIGNAL signal_integer4 : INTEGER := 0;
+-- BEGIN
+--     PROCESS (clk)
+--     BEGIN
+--         IF rising_edge(clk) THEN
+--             IF (unsigned(data) > 0001100011) THEN
+--                 BCD_digit_1 <= "1101";
+--                 BCD_digit_2 <= "1101";
+--                 BCD_digit_3 <= "1100";
+--             ELSE
+--                 signal_integer1 <= conv_integer(unsigned(data_q)) MOD 10;
+--                 signal_integer2 <= (conv_integer(unsigned(data_q)) / 10) MOD 10;
+--                 signal_integer3 <= conv_integer(unsigned(data_r)) MOD 10;
+--                 signal_integer4 <= (conv_integer(unsigned(data_r)) / 10) MOD 10;
 
-                    BCD_digit_1 <= conv_std_logic_vector(signal_integer1, N-1);
-                    BCD_digit_2 <= conv_std_logic_vector(signal_integer2, N-1);
-                    
-                    if (minus_con = '1') then -- if MSB is 1
-                        BCD_digit_3 <= "1011"; -- minus
-                    else
-                        BCD_digit_3 <= "1010"; -- none
-                    end if;
-            end if;
-        end if;
-    end process;
-end Structural;
+--                 BCD_digit_1 <= conv_std_logic_vector(signal_integer1, N - 1);
+--                 BCD_digit_2 <= conv_std_logic_vector(signal_integer2, N - 1);
+
+                
+--             END IF;
+--         END IF;
+--     END PROCESS;
+-- END Structural;
