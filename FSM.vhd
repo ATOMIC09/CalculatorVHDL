@@ -28,8 +28,19 @@ BEGIN
             END CASE;
         END IF;
 
-        IF rst_n = '1' THEN
-            done <= '0';
+        if rising_edge(start) then
+            case current_state is
+                when GET_AandB => current_state <= GET_OPERATOR;
+                when GET_OPERATOR => current_state <= FINISHED;
+                when FINISHED => current_state <= FINISHED;
+            end case;
+        end if;
+        
+        if rst_n = '1' then
+            stored_A <= (others => '0');
+            stored_B <= (others => '0');
+            stored_operator <= (others => '0');
+            stored_done <= '0';
             current_state <= GET_AandB;
         ELSIF rising_edge(clk) THEN
             CASE current_state IS
