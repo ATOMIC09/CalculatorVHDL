@@ -25,7 +25,7 @@ ARCHITECTURE Structural OF CalculatorVHDL IS
     SIGNAL RESULT_MUL, RESULT_DIV_REM : STD_LOGIC_VECTOR(2 * N - 1 DOWNTO 0) := (OTHERS => '0');
     SIGNAL RESULT_DIV_MINUS_QUO, RESULT_DIV_MINUS_REM, RESULT_DIV_ERR : STD_LOGIC := '0'; 
     SIGNAL MINUS_ADD, MINUS_SUB, MINUS_MUL, MINUS_DIV, MINUS_PREVIEW_A, MINUS_PREVIEW_B : STD_LOGIC := '0';
-    SIGNAL SIGNDETECTED_ADD_RESULT, SIGNDETECTED_SUB_RESULT, SIGNDETECTED_MUL_RESULT, SIGNDETECTED_DIV_RESULT : STD_LOGIC_VECTOR(N - 1 DOWNTO 0) := (OTHERS => '0');
+    SIGNAL SIGNDETECTED_ADD_RESULT, SIGNDETECTED_SUB_RESULT : STD_LOGIC_VECTOR(N - 1 DOWNTO 0) := (OTHERS => '0');
     SIGNAL V_ADD, V_SUB : STD_LOGIC := '0';
 
     -- SIGNAL Between Converter and MUX (Digit 4 bits)
@@ -279,7 +279,7 @@ BEGIN
             clk => CLK,
             v => V_ADD,
             minus_con => MINUS_ADD,
-            data => RESULT_ADD,
+            data => SIGNDETECTED_ADD_RESULT,
             BCD_digit_1 => SEG1_ADD,
             BCD_digit_2 => SEG2_ADD,
             BCD_digit_3 => SEG3_ADD
@@ -289,7 +289,7 @@ BEGIN
             clk => CLK,
             v => V_SUB,
             minus_con => MINUS_SUB,
-            data => RESULT_SUB,
+            data => SIGNDETECTED_SUB_RESULT,
             BCD_digit_1 => SEG1_SUB,
             BCD_digit_2 => SEG2_SUB,
             BCD_digit_3 => SEG3_SUB
@@ -307,7 +307,7 @@ BEGIN
         PORT MAP(
             clk => CLK,
             minus_q => RESULT_DIV_MINUS_QUO,
-            minus_r => RESULT_DIV_MINUS_QUO,
+            minus_r => RESULT_DIV_MINUS_REM,
             data_err => RESULT_DIV_ERR,
             data_q => RESULT_DIV_QUO,
             data_r => RESULT_DIV_REM,

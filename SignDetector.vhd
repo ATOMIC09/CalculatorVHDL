@@ -16,6 +16,7 @@ ARCHITECTURE Structural OF SignDetector IS
     SIGNAL plusone : STD_LOGIC_VECTOR(N-1 DOWNTO 0) := (0 => '1', OTHERS => '0');
 
 BEGIN
+    -- Add 1 to the input
     adder : ENTITY work.BinaryAdderAndSubtractor(Structural) -- Add 1 to the input
         PORT MAP(
             a => NOT s_detect,

@@ -33,19 +33,28 @@ BEGIN
     PROCESS (clk)
     BEGIN
         IF rising_edge(clk) THEN
-            IF (unsigned(data_q) > 11111) THEN
-                BCD_digit_1 <= "1101";
-                BCD_digit_2 <= "1101";
-                BCD_digit_3 <= "1100";
-            ELSIF (unsigned(data_r) > 0001100011) THEN
-                BCD_digit_1 <= "1101";
-                BCD_digit_2 <= "1101";
-                BCD_digit_3 <= "1100";
-            ELSIF (data_err = '1') THEN
-                BCD_digit_1 <= "1101";
-                BCD_digit_2 <= "1101";
-                BCD_digit_3 <= "1100";
-            ELSE
+            IF (unsigned(data_q) > 11111) THEN -- ERR overflow
+                BCD_digit_1 <= "1101"; -- R
+                BCD_digit_2 <= "1101"; -- R
+                BCD_digit_3 <= "1100"; -- E
+                BCD_digit_4 <= "1101"; -- R
+                BCD_digit_5 <= "1101"; -- R
+                BCD_digit_6 <= "1100"; -- E
+            ELSIF (unsigned(data_r) > 0001100011) THEN -- ERR overflow
+                BCD_digit_1 <= "1101"; -- R
+                BCD_digit_2 <= "1101"; -- R
+                BCD_digit_3 <= "1100"; -- E
+                BCD_digit_4 <= "1101"; -- R
+                BCD_digit_5 <= "1101"; -- R
+                BCD_digit_6 <= "1100"; -- E
+            ELSIF (data_err = '1') THEN -- ERR div by zero
+                BCD_digit_1 <= "1101"; -- R
+                BCD_digit_2 <= "1101"; -- R
+                BCD_digit_3 <= "1100"; -- E
+                BCD_digit_4 <= "0000"; -- 0
+                BCD_digit_5 <= "0000"; -- 0
+                BCD_digit_6 <= "0000"; -- 0
+            ELSE -- normal mod and div operations
                 signal_integer1 <= conv_integer(unsigned(data_q)) MOD 10;
                 signal_integer2 <= (conv_integer(unsigned(data_q)) / 10) MOD 10;
                 signal_integer3 <= conv_integer(unsigned(data_r)) MOD 10;
