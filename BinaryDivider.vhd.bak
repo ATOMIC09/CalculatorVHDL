@@ -34,7 +34,7 @@ BEGIN
 
     PROCESS (clk, reset, enable)
     BEGIN
-        IF Divisor = "00000" THEN
+        IF Divisor = (OTHERS => '0') THEN
             ERR <= '1';
         ELSE
             ERR <= '0';
