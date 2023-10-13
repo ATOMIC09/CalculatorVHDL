@@ -21,9 +21,9 @@ ARCHITECTURE Structural OF CalculatorVHDL IS
     SIGNAL STORE_STATE : STD_LOGIC_VECTOR(1 DOWNTO 0) := (OTHERS => '0');
     SIGNAL DONE : STD_LOGIC := '0';
     SIGNAL TRIG_ADD, TRIG_SUB, TRIG_MUL, TRIG_DIV : STD_LOGIC := '0';
-    SIGNAL RESULT_ADD, RESULT_SUB : STD_LOGIC_VECTOR(N - 1 DOWNTO 0) := (OTHERS => '0');
-    SIGNAL RESULT_MUL, RESULT_DIV : STD_LOGIC_VECTOR(2 * N - 1 DOWNTO 0) := (OTHERS => '0');
-    -- SIGNAL REMAINDER_DIV : STD_LOGIC_VECTOR(N - 1 DOWNTO 0) := (others => '0');   
+    SIGNAL RESULT_ADD, RESULT_SUB, RESULT_DIV_QUO : STD_LOGIC_VECTOR(N - 1 DOWNTO 0) := (OTHERS => '0');
+    SIGNAL RESULT_MUL, RESULT_DIV_REM : STD_LOGIC_VECTOR(2 * N - 1 DOWNTO 0) := (OTHERS => '0');
+    SIGNAL RESULT_DIV_MINUS_QUO, RESULT_DIV_MINUS_REM, RESULT_DIV_ERR : STD_LOGIC := '0'; 
     SIGNAL MINUS_ADD, MINUS_SUB, MINUS_MUL, MINUS_DIV, MINUS_PREVIEW_A, MINUS_PREVIEW_B : STD_LOGIC := '0';
     SIGNAL SIGNDETECTED_ADD_RESULT, SIGNDETECTED_SUB_RESULT, SIGNDETECTED_MUL_RESULT, SIGNDETECTED_DIV_RESULT : STD_LOGIC_VECTOR(N - 1 DOWNTO 0) := (OTHERS => '0');
     SIGNAL V_ADD, V_SUB : STD_LOGIC := '0';
@@ -97,7 +97,7 @@ BEGIN
             BCD_digit_1 => SEG1_O
         );
 
-    MUX_Result : ENTITY work.MUX9to3_Result(Behavioral) -- choose what value to show for the first 3 digit
+    MUX_Result : ENTITY work.MUX18to3_Result(Behavioral) -- choose what value to show for the first 3 digit
         PORT MAP(
             clk => CLK,
             control => STORE_STATE,
@@ -126,7 +126,7 @@ BEGIN
             BCD_TO_SEGMENT_3 => SEG3_A_BCDto7SEG
         );
 
-    MUX_Remainder : ENTITY work.MUX9to3_Remainder(Behavioral) -- choose what value to show for the last 3 digit
+    MUX_Remainder : ENTITY work.MUX18to3_Remainder(Behavioral) -- choose what value to show for the last 3 digit
         PORT MAP(
             clk => CLK,
             control => STORE_STATE,
@@ -146,9 +146,9 @@ BEGIN
             BCD_digit_4_MUL => "1011",
             BCD_digit_5_MUL => "1011",
             BCD_digit_6_MUL => "1011",
-            BCD_digit_4_DIV => SEG1_DIV,
-            BCD_digit_5_DIV => SEG2_DIV,
-            BCD_digit_6_DIV => SEG3_DIV,
+            BCD_digit_4_DIV => SEG4_DIV,
+            BCD_digit_5_DIV => SEG5_DIV,
+            BCD_digit_6_DIV => SEG6_DIV,
             BCD_TO_SEGMENT_4 => SEG1_B_BCDto7SEG,
             BCD_TO_SEGMENT_5 => SEG2_B_BCDto7SEG,
             BCD_TO_SEGMENT_6 => SEG3_B_BCDto7SEG
@@ -215,6 +215,7 @@ BEGIN
             enable => TRIG_ADD,
             s => RESULT_ADD,
             v => V_ADD
+            -- Reserved for done signal
         );
 
     Subtractor : ENTITY work.BinaryAdderAndSubtractor(Structural)
@@ -226,6 +227,7 @@ BEGIN
             enable => TRIG_SUB,
             s => RESULT_SUB,
             v => V_SUB
+            -- Reserved for done signal
         );
     
     Multiplier : ENTITY work.BinaryMultiplier(Behavioral)
@@ -236,6 +238,22 @@ BEGIN
             A => STORE_A,
             B => STORE_B,
             R => RESULT_MUL
+            -- Reserved for done signal
+        );
+
+    Divider : ENTITY work.BinaryDivider(Behavioral)
+        PORT MAP(
+            clk => CLK,
+            enable => TRIG_DIV,
+            reset => NOT RST_N,
+            Divident => STORE_A,
+            Divisor => STORE_B,
+            Quotient => RESULT_DIV_QUO,
+            Remainder => RESULT_DIV_REM,
+            MINUS_QUOTIENT => RESULT_DIV_MINUS_QUO,
+            MINUS_REMAINDER => RESULT_DIV_MINUS_REM,
+            ERR => RESULT_DIV_ERR
+            -- Reserved for done signal
         );
 
     -- sign detector (for add and subtract)
@@ -284,6 +302,21 @@ BEGIN
             BCD_digit_1 => SEG1_MUL,
             BCD_digit_2 => SEG2_MUL,
             BCD_digit_3 => SEG3_MUL
+        );
+    BinaryToBCDConverter_Divider : ENTITY work.BinaryToBCDConverterDIV(Structural)
+        PORT MAP(
+            clk => CLK,
+            minus_q => RESULT_DIV_MINUS_QUO,
+            minus_r => RESULT_DIV_MINUS_QUO,
+            data_err => RESULT_DIV_ERR,
+            data_q => RESULT_DIV_QUO,
+            data_r => RESULT_DIV_REM,
+            BCD_digit_1 => SEG1_DIV,
+            BCD_digit_2 => SEG2_DIV,
+            BCD_digit_3 => SEG3_DIV,
+            BCD_digit_4 => SEG4_DIV,
+            BCD_digit_5 => SEG5_DIV,
+            BCD_digit_6 => SEG6_DIV
         );
 
     -- BCD Result showing

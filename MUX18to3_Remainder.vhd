@@ -1,7 +1,7 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 
-entity MUX9to3_Remainder is
+entity MUX18to3_Remainder is
     generic(N : integer := 5);
     port(
         BCD_digit_4_A : in std_logic_vector(N-2 downto 0);
@@ -35,9 +35,9 @@ entity MUX9to3_Remainder is
         operate : in std_logic_vector;
         clk : in std_logic
     );
-end MUX9to3_Remainder;
+end MUX18to3_Remainder;
 
-architecture Behavioral of MUX9to3_Remainder is
+architecture Behavioral of MUX18to3_Remainder is
     signal BCD_TO_SEGMENT_4_temp : std_logic_vector(N-2 downto 0);
     signal BCD_TO_SEGMENT_5_temp : std_logic_vector(N-2 downto 0);
     signal BCD_TO_SEGMENT_6_temp : std_logic_vector(N-2 downto 0);

@@ -1,7 +1,7 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 
-entity MUX9to3_Result is
+entity MUX18to3_Result is
     generic(N : integer := 5);
     port(
         BCD_digit_1_A : in std_logic_vector(N-2 downto 0);
@@ -35,9 +35,9 @@ entity MUX9to3_Result is
         operate : in std_logic_vector;
         clk : in std_logic
     );
-end MUX9to3_Result;
+end MUX18to3_Result;
 
-architecture Behavioral of MUX9to3_Result is
+architecture Behavioral of MUX18to3_Result is
     signal BCD_TO_SEGMENT_1_temp : std_logic_vector(N-2 downto 0);
     signal BCD_TO_SEGMENT_2_temp : std_logic_vector(N-2 downto 0);
     signal BCD_TO_SEGMENT_3_temp : std_logic_vector(N-2 downto 0);
