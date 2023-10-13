@@ -233,7 +233,7 @@ BEGIN
     Multiplier : ENTITY work.BinaryMultiplier(Behavioral)
         PORT MAP(
             clk => CLK,
-            enable => TRIG_SUB,
+            enable => TRIG_MUL,
             reset => NOT RST_N,
             A => STORE_A,
             B => STORE_B,
