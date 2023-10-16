@@ -7,7 +7,11 @@ ENTITY CalculatorVHDL IS
     PORT (
         CLK, RST_N, Start : IN STD_LOGIC;
         SWITCHES : IN STD_LOGIC_VECTOR(2 * N - 1 DOWNTO 0);
-        SEVENSEG_DIGIT_1, SEVENSEG_DIGIT_2, SEVENSEG_DIGIT_3, SEVENSEG_DIGIT_4, SEVENSEG_DIGIT_5, SEVENSEG_DIGIT_6 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0) := (OTHERS => '0')
+        SEVENSEG_DIGIT_1, SEVENSEG_DIGIT_2, SEVENSEG_DIGIT_3, SEVENSEG_DIGIT_4, SEVENSEG_DIGIT_5, SEVENSEG_DIGIT_6 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0) := (OTHERS => '0');
+        DONE_LED_ADD : OUT STD_LOGIC;
+        DONE_LED_SUB : OUT STD_LOGIC;
+        DONE_LED_MUL : OUT STD_LOGIC;
+        DONE_LED_DIV : OUT STD_LOGIC
     );
 END CalculatorVHDL;
 
@@ -25,7 +29,7 @@ ARCHITECTURE Structural OF CalculatorVHDL IS
     SIGNAL RESULT_MUL, RESULT_DIV_REM : STD_LOGIC_VECTOR(2 * N - 1 DOWNTO 0) := (OTHERS => '0');
     SIGNAL RESULT_DIV_MINUS_QUO, RESULT_DIV_MINUS_REM, RESULT_DIV_ERR : STD_LOGIC := '0'; 
     SIGNAL MINUS_ADD, MINUS_SUB, MINUS_MUL, MINUS_DIV, MINUS_PREVIEW_A, MINUS_PREVIEW_B : STD_LOGIC := '0';
-    SIGNAL SIGNDETECTED_ADD_RESULT, SIGNDETECTED_SUB_RESULT : STD_LOGIC_VECTOR(N - 1 DOWNTO 0) := (OTHERS => '0');
+    SIGNAL SIGNDETECTED_ADD_RESULT, SIGNDETECTED_SUB_RESULT, SIGNDETECTED_MUL_RESULT, SIGNDETECTED_DIV_RESULT : STD_LOGIC_VECTOR(N - 1 DOWNTO 0) := (OTHERS => '0');
     SIGNAL V_ADD, V_SUB : STD_LOGIC := '0';
 
     -- SIGNAL Between Converter and MUX (Digit 4 bits)
@@ -214,8 +218,8 @@ BEGIN
             clock => CLK,
             enable => TRIG_ADD,
             s => RESULT_ADD,
-            v => V_ADD
-            -- Reserved for done signal
+            v => V_ADD,
+            DONE => DONE_LED_ADD-- Reserved for done signal
         );
 
     Subtractor : ENTITY work.BinaryAdderAndSubtractor(Structural)
@@ -226,19 +230,19 @@ BEGIN
             clock => CLK,
             enable => TRIG_SUB,
             s => RESULT_SUB,
-            v => V_SUB
-            -- Reserved for done signal
+            v => V_SUB,
+            DONE => DONE_LED_SUB-- Reserved for done signal
         );
     
     Multiplier : ENTITY work.BinaryMultiplier(Behavioral)
         PORT MAP(
             clk => CLK,
-            enable => TRIG_MUL,
+            enable => TRIG_SUB,
             reset => NOT RST_N,
             A => STORE_A,
             B => STORE_B,
-            R => RESULT_MUL
-            -- Reserved for done signal
+            R => RESULT_MUL,
+            DONE => DONE_LED_MUL-- Reserved for done signal
         );
 
     Divider : ENTITY work.BinaryDivider(Behavioral)
@@ -252,8 +256,8 @@ BEGIN
             Remainder => RESULT_DIV_REM,
             MINUS_QUOTIENT => RESULT_DIV_MINUS_QUO,
             MINUS_REMAINDER => RESULT_DIV_MINUS_REM,
-            ERR => RESULT_DIV_ERR
-            -- Reserved for done signal
+            ERR => RESULT_DIV_ERR,
+            DONE => DONE_LED_DIV-- Reserved for done signal
         );
 
     -- sign detector (for add and subtract)
@@ -279,7 +283,7 @@ BEGIN
             clk => CLK,
             v => V_ADD,
             minus_con => MINUS_ADD,
-            data => SIGNDETECTED_ADD_RESULT,
+            data => RESULT_ADD,
             BCD_digit_1 => SEG1_ADD,
             BCD_digit_2 => SEG2_ADD,
             BCD_digit_3 => SEG3_ADD
@@ -289,7 +293,7 @@ BEGIN
             clk => CLK,
             v => V_SUB,
             minus_con => MINUS_SUB,
-            data => SIGNDETECTED_SUB_RESULT,
+            data => RESULT_SUB,
             BCD_digit_1 => SEG1_SUB,
             BCD_digit_2 => SEG2_SUB,
             BCD_digit_3 => SEG3_SUB
@@ -307,7 +311,7 @@ BEGIN
         PORT MAP(
             clk => CLK,
             minus_q => RESULT_DIV_MINUS_QUO,
-            minus_r => RESULT_DIV_MINUS_REM,
+            minus_r => RESULT_DIV_MINUS_QUO,
             data_err => RESULT_DIV_ERR,
             data_q => RESULT_DIV_QUO,
             data_r => RESULT_DIV_REM,
