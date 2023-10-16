@@ -7,3 +7,6 @@
 *.qws
 *.bak
 *.v4p
+*.vwf
+
+/simulation
