@@ -36,6 +36,7 @@ BEGIN
     BEGIN
         IF Divisor = "00000" THEN
             ERR <= '1';
+            DONE <= '1';
         ELSE
             ERR <= '0';
             IF reset = '1' THEN
@@ -85,26 +86,26 @@ BEGIN
                             ELSIF data_Remainder >= data_Divisor THEN
                                 data_Remainder <= STD_LOGIC_VECTOR(unsigned(data_Remainder) - unsigned(data_Divisor));
                                 data_Divisor <= STD_LOGIC_VECTOR(shift_right(unsigned(data_Divisor), 1));
-                                data_Quotient <= STD_LOGIC_VECTOR(data_Quotient(N-2 DOWNTO 0)) & "1";
+                                data_Quotient <= STD_LOGIC_VECTOR(data_Quotient(N - 2 DOWNTO 0)) & "1";
                             END IF;
                             counter <= counter + 1;
                         ELSE
-                            if Divident(N - 1) = '0' AND Divisor(N - 1) = '0' THEN
+                            IF Divident(N - 1) = '0' AND Divisor(N - 1) = '0' THEN
                                 data_Quotient <= data_Quotient;
                                 data_Remainder <= data_Remainder;
                                 MINUS_QUOTIENT <= '0';
                                 MINUS_REMAINDER <= '0';
-                            elsif Divident(N - 1) = '1' AND Divisor(N - 1) = '0' THEN
+                            ELSIF Divident(N - 1) = '1' AND Divisor(N - 1) = '0' THEN
                                 data_Quotient <= data_Quotient + 1;
                                 data_Remainder <= data_Remainder + 1;
                                 MINUS_QUOTIENT <= '1';
                                 MINUS_REMAINDER <= '0';
-                            elsif Divident(N - 1) = '0' AND Divisor(N - 1) = '1' THEN
+                            ELSIF Divident(N - 1) = '0' AND Divisor(N - 1) = '1' THEN
                                 data_Quotient <= data_Quotient + 1;
                                 data_Remainder <= data_Remainder + 1;
                                 MINUS_QUOTIENT <= '1';
                                 MINUS_REMAINDER <= '1';
-                            elsif Divident(N - 1) = '1' AND Divisor(N - 1) = '1' THEN
+                            ELSIF Divident(N - 1) = '1' AND Divisor(N - 1) = '1' THEN
                                 data_Quotient <= data_Quotient;
                                 data_Remainder <= data_Remainder;
                                 MINUS_QUOTIENT <= '0';

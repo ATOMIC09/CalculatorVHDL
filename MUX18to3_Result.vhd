@@ -1,81 +1,81 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 
-entity MUX18to3_Result is
-    generic(N : integer := 5);
-    port(
-        BCD_digit_1_A : in std_logic_vector(N-2 downto 0);
-        BCD_digit_2_A : in std_logic_vector(N-2 downto 0);
-        BCD_digit_3_A : in std_logic_vector(N-2 downto 0);
-        BCD_digit_1_B : in std_logic_vector(N-2 downto 0);
-        BCD_digit_2_B : in std_logic_vector(N-2 downto 0);
-        BCD_digit_3_B : in std_logic_vector(N-2 downto 0);
+ENTITY MUX18to3_Result IS
+    GENERIC (N : INTEGER := 5);
+    PORT (
+        BCD_digit_1_A : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_2_A : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_3_A : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_1_B : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_2_B : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_3_B : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
 
-        BCD_digit_1_ADD : in std_logic_vector(N-2 downto 0);
-        BCD_digit_2_ADD : in std_logic_vector(N-2 downto 0);
-        BCD_digit_3_ADD : in std_logic_vector(N-2 downto 0);
+        BCD_digit_1_ADD : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_2_ADD : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_3_ADD : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
 
-        BCD_digit_1_SUB : in std_logic_vector(N-2 downto 0);
-        BCD_digit_2_SUB : in std_logic_vector(N-2 downto 0);
-        BCD_digit_3_SUB : in std_logic_vector(N-2 downto 0);
+        BCD_digit_1_SUB : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_2_SUB : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_3_SUB : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
 
-        BCD_digit_1_MUL : in std_logic_vector(N-2 downto 0);
-        BCD_digit_2_MUL : in std_logic_vector(N-2 downto 0);
-        BCD_digit_3_MUL : in std_logic_vector(N-2 downto 0);
+        BCD_digit_1_MUL : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_2_MUL : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_3_MUL : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
 
-        BCD_digit_1_DIV : in std_logic_vector(N-2 downto 0);
-        BCD_digit_2_DIV : in std_logic_vector(N-2 downto 0);
-        BCD_digit_3_DIV : in std_logic_vector(N-2 downto 0);
+        BCD_digit_1_DIV : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_2_DIV : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_3_DIV : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
 
-        BCD_TO_SEGMENT_1 : out std_logic_vector(N-2 downto 0);
-        BCD_TO_SEGMENT_2 : out std_logic_vector(N-2 downto 0);
-        BCD_TO_SEGMENT_3 : out std_logic_vector(N-2 downto 0);
+        BCD_TO_SEGMENT_1 : OUT STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_TO_SEGMENT_2 : OUT STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_TO_SEGMENT_3 : OUT STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
 
-        control : in std_logic_vector;
-        operate : in std_logic_vector;
-        clk : in std_logic
+        control : IN STD_LOGIC_VECTOR;
+        operate : IN STD_LOGIC_VECTOR;
+        clk : IN STD_LOGIC
     );
-end MUX18to3_Result;
+END MUX18to3_Result;
 
-architecture Behavioral of MUX18to3_Result is
-    signal BCD_TO_SEGMENT_1_temp : std_logic_vector(N-2 downto 0);
-    signal BCD_TO_SEGMENT_2_temp : std_logic_vector(N-2 downto 0);
-    signal BCD_TO_SEGMENT_3_temp : std_logic_vector(N-2 downto 0);
-begin
-    process(clk)
-    begin
-        if rising_edge(clk) then
-            if control = "00"  then
+ARCHITECTURE Behavioral OF MUX18to3_Result IS
+    SIGNAL BCD_TO_SEGMENT_1_temp : STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+    SIGNAL BCD_TO_SEGMENT_2_temp : STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+    SIGNAL BCD_TO_SEGMENT_3_temp : STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+BEGIN
+    PROCESS (clk)
+    BEGIN
+        IF rising_edge(clk) THEN
+            IF control = "00" THEN
                 BCD_TO_SEGMENT_1_temp <= BCD_digit_1_A;
                 BCD_TO_SEGMENT_2_temp <= BCD_digit_2_A;
                 BCD_TO_SEGMENT_3_temp <= BCD_digit_3_A;
-            elsif control = "01" then
+            ELSIF control = "01" THEN
                 BCD_TO_SEGMENT_1_temp <= BCD_digit_1_B;
                 BCD_TO_SEGMENT_2_temp <= BCD_digit_2_B;
                 BCD_TO_SEGMENT_3_temp <= BCD_digit_3_B;
-            elsif control = "10" then
-                if operate = "00" then
+            ELSIF control = "10" THEN
+                IF operate = "00" THEN
                     BCD_TO_SEGMENT_1_temp <= BCD_digit_1_DIV;
                     BCD_TO_SEGMENT_2_temp <= BCD_digit_2_DIV;
                     BCD_TO_SEGMENT_3_temp <= BCD_digit_3_DIV;
-                elsif operate = "01" then
+                ELSIF operate = "01" THEN
                     BCD_TO_SEGMENT_1_temp <= BCD_digit_1_MUL;
                     BCD_TO_SEGMENT_2_temp <= BCD_digit_2_MUL;
                     BCD_TO_SEGMENT_3_temp <= BCD_digit_3_MUL;
-                elsif operate = "10" then
+                ELSIF operate = "10" THEN
                     BCD_TO_SEGMENT_1_temp <= BCD_digit_1_SUB;
                     BCD_TO_SEGMENT_2_temp <= BCD_digit_2_SUB;
                     BCD_TO_SEGMENT_3_temp <= BCD_digit_3_SUB;
-                elsif operate = "11" then
+                ELSIF operate = "11" THEN
                     BCD_TO_SEGMENT_1_temp <= BCD_digit_1_ADD;
                     BCD_TO_SEGMENT_2_temp <= BCD_digit_2_ADD;
                     BCD_TO_SEGMENT_3_temp <= BCD_digit_3_ADD;
-                end if;
-            end if;
-        end if;
-    end process;
+                END IF;
+            END IF;
+        END IF;
+    END PROCESS;
 
     BCD_TO_SEGMENT_1 <= BCD_TO_SEGMENT_1_temp;
     BCD_TO_SEGMENT_2 <= BCD_TO_SEGMENT_2_temp;
     BCD_TO_SEGMENT_3 <= BCD_TO_SEGMENT_3_temp;
-end Behavioral;
+END Behavioral;

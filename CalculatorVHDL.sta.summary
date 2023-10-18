@@ -1,0 +1,101 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'CLK'
+Slack : -17.833
+TNS   : -939.070
+
+Type  : Slow 1200mV 85C Model Setup 'Start'
+Slack : -0.045
+TNS   : -0.055
+
+Type  : Slow 1200mV 85C Model Hold 'CLK'
+Slack : 0.322
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'Start'
+Slack : 0.580
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Recovery 'CLK'
+Slack : -1.544
+TNS   : -46.637
+
+Type  : Slow 1200mV 85C Model Removal 'CLK'
+Slack : 1.475
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'CLK'
+Slack : -3.000
+TNS   : -456.169
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'Start'
+Slack : -3.000
+TNS   : -7.209
+
+Type  : Slow 1200mV 0C Model Setup 'CLK'
+Slack : -16.157
+TNS   : -840.780
+
+Type  : Slow 1200mV 0C Model Setup 'Start'
+Slack : 0.042
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'CLK'
+Slack : 0.288
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'Start'
+Slack : 0.548
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Recovery 'CLK'
+Slack : -1.327
+TNS   : -40.010
+
+Type  : Slow 1200mV 0C Model Removal 'CLK'
+Slack : 1.353
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'CLK'
+Slack : -3.000
+TNS   : -456.169
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'Start'
+Slack : -3.000
+TNS   : -7.209
+
+Type  : Fast 1200mV 0C Model Setup 'CLK'
+Slack : -6.539
+TNS   : -269.583
+
+Type  : Fast 1200mV 0C Model Setup 'Start'
+Slack : 0.546
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'CLK'
+Slack : 0.140
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'Start'
+Slack : 0.227
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Recovery 'CLK'
+Slack : -0.121
+TNS   : -1.936
+
+Type  : Fast 1200mV 0C Model Removal 'CLK'
+Slack : 0.631
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'CLK'
+Slack : -3.000
+TNS   : -334.865
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'Start'
+Slack : -3.000
+TNS   : -6.147
+
+------------------------------------------------------------
