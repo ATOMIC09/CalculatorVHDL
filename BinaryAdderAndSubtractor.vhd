@@ -48,7 +48,12 @@ BEGIN
         );
     END GENERATE;
 
-    v <= c_internal(N) XOR c_internal(N - 1); -- Calculate overflow
-    DONE <= '1';
+    PROCESS (enable)
+    BEGIN
+        IF (enable = '1') THEN
+            v <= c_internal(N) XOR c_internal(N - 1); -- Calculate overflow
+            DONE <= '1';
+        END IF;
+    END PROCESS;
 
 END Structural;

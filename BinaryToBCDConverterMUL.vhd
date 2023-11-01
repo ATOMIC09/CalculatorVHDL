@@ -23,10 +23,10 @@ BEGIN
     PROCESS (clk)
     BEGIN
         IF rising_edge(clk) THEN
-            IF (unsigned(data) > 0001100011) THEN
-                BCD_digit_1 <= "1101";
-                BCD_digit_2 <= "1101";
-                BCD_digit_3 <= "1100";
+            IF (unsigned(data) > 0001100011) THEN -- if more than 99
+                BCD_digit_1 <= "1101"; -- r
+                BCD_digit_2 <= "1101"; -- r
+                BCD_digit_3 <= "1100"; -- E
             ELSE
                 signal_integer1 <= conv_integer(unsigned(data)) MOD 10;
                 signal_integer2 <= (conv_integer(unsigned(data)) / 10) MOD 10;

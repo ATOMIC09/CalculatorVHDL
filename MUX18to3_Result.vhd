@@ -4,12 +4,12 @@ USE IEEE.STD_LOGIC_1164.ALL;
 ENTITY MUX18to3_Result IS
     GENERIC (N : INTEGER := 5);
     PORT (
-        BCD_digit_1_A : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
-        BCD_digit_2_A : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
-        BCD_digit_3_A : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
-        BCD_digit_1_B : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
-        BCD_digit_2_B : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
-        BCD_digit_3_B : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_1_S0 : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0); -- Preview A
+        BCD_digit_2_S0 : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_3_S0 : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_1_S1 : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0); -- Preview Operator
+        BCD_digit_2_S1 : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_3_S1 : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
 
         BCD_digit_1_ADD : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
         BCD_digit_2_ADD : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
@@ -45,15 +45,15 @@ BEGIN
     PROCESS (clk)
     BEGIN
         IF rising_edge(clk) THEN
-            IF control = "00" THEN
-                BCD_TO_SEGMENT_1_temp <= BCD_digit_1_A;
-                BCD_TO_SEGMENT_2_temp <= BCD_digit_2_A;
-                BCD_TO_SEGMENT_3_temp <= BCD_digit_3_A;
-            ELSIF control = "01" THEN
-                BCD_TO_SEGMENT_1_temp <= BCD_digit_1_B;
-                BCD_TO_SEGMENT_2_temp <= BCD_digit_2_B;
-                BCD_TO_SEGMENT_3_temp <= BCD_digit_3_B;
-            ELSIF control = "10" THEN
+            IF control = "00" THEN -- Choose Preview A
+                BCD_TO_SEGMENT_1_temp <= BCD_digit_1_S0;
+                BCD_TO_SEGMENT_2_temp <= BCD_digit_2_S0;
+                BCD_TO_SEGMENT_3_temp <= BCD_digit_3_S0;
+            ELSIF control = "01" THEN -- Choose Preview Operator
+                BCD_TO_SEGMENT_1_temp <= BCD_digit_1_S1;
+                BCD_TO_SEGMENT_2_temp <= BCD_digit_2_S1;
+                BCD_TO_SEGMENT_3_temp <= BCD_digit_3_S1;
+            ELSIF control = "10" THEN -- Choose Result
                 IF operate = "00" THEN
                     BCD_TO_SEGMENT_1_temp <= BCD_digit_1_DIV;
                     BCD_TO_SEGMENT_2_temp <= BCD_digit_2_DIV;

@@ -98,7 +98,7 @@ BEGIN
         PORT MAP(
             clk => CLK,
             data => STORE_OPERATOR,
-            BCD_digit_1 => SEG1_O
+            BCD_All_digit => SEG1_O
         );
 
     MUX_Result : ENTITY work.MUX18to3_Result(Behavioral) -- choose what value to show for the first 3 digit
@@ -106,13 +106,13 @@ BEGIN
             clk => CLK,
             control => STORE_STATE,
             operate => STORE_OPERATOR,
-            BCD_digit_1_A => SEG1_A,
-            BCD_digit_2_A => SEG2_A,
-            BCD_digit_3_A => SEG3_A,
-            BCD_digit_1_B => SEG1_O,
-            BCD_digit_2_B => SEG1_O,
-            BCD_digit_3_B => SEG1_O,
-            BCD_digit_1_ADD => SEG1_ADD,
+            BCD_digit_1_S0 => SEG1_A, -- Show Preview A (Digit 1)
+            BCD_digit_2_S0 => SEG2_A, -- Show Preview A (Digit 2)
+            BCD_digit_3_S0 => SEG3_A, -- Show Preview A (Digit 3)
+            BCD_digit_1_S1 => SEG1_O, -- Show Preview Operator
+            BCD_digit_2_S1 => SEG1_O, -- Show Preview Operator
+            BCD_digit_3_S1 => SEG1_O, -- Show Preview Operator
+            BCD_digit_1_ADD => SEG1_ADD, -- Show results for every operations
             BCD_digit_2_ADD => SEG2_ADD,
             BCD_digit_3_ADD => SEG3_ADD,
             BCD_digit_1_SUB => SEG1_SUB,
@@ -135,13 +135,13 @@ BEGIN
             clk => CLK,
             control => STORE_STATE,
             operate => STORE_OPERATOR,
-            BCD_digit_4_A => SEG1_B,
-            BCD_digit_5_A => SEG2_B,
-            BCD_digit_6_A => SEG3_B,
-            BCD_digit_4_B => SEG1_O,
-            BCD_digit_5_B => SEG1_O,
-            BCD_digit_6_B => SEG1_O,
-            BCD_digit_4_ADD => "1011",
+            BCD_digit_4_S0 => SEG1_B, -- Show Preview B
+            BCD_digit_5_S0 => SEG2_B, -- Show Preview B
+            BCD_digit_6_S0 => SEG3_B, -- Show Preview B
+            BCD_digit_4_S1 => SEG1_O, -- Show Preview Operator
+            BCD_digit_5_S1 => SEG1_O, -- Show Preview Operator
+            BCD_digit_6_S1 => SEG1_O, -- Show Preview Operator 
+            BCD_digit_4_ADD => "1011", -- Show no remainder for add/sub/mul as "---"
             BCD_digit_5_ADD => "1011",
             BCD_digit_6_ADD => "1011",
             BCD_digit_4_SUB => "1011",
@@ -150,7 +150,7 @@ BEGIN
             BCD_digit_4_MUL => "1011",
             BCD_digit_5_MUL => "1011",
             BCD_digit_6_MUL => "1011",
-            BCD_digit_4_DIV => SEG4_DIV,
+            BCD_digit_4_DIV => SEG4_DIV, -- Show remainder for division
             BCD_digit_5_DIV => SEG5_DIV,
             BCD_digit_6_DIV => SEG6_DIV,
             BCD_TO_SEGMENT_4 => SEG1_B_BCDto7SEG,

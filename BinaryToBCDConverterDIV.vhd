@@ -60,15 +60,15 @@ BEGIN
                 signal_integer3 <= conv_integer(unsigned(data_r)) MOD 10;
                 signal_integer4 <= (conv_integer(unsigned(data_r)) / 10) MOD 10;
 
-                BCD_digit_1 <= conv_std_logic_vector(signal_integer1, N - 1);
-                BCD_digit_2 <= conv_std_logic_vector(signal_integer2, N - 1);
-                BCD_digit_4 <= conv_std_logic_vector(signal_integer3, N - 1);
-                BCD_digit_5 <= conv_std_logic_vector(signal_integer4, N - 1);
+                BCD_digit_1 <= conv_std_logic_vector(signal_integer3, N - 1);
+                BCD_digit_2 <= conv_std_logic_vector(signal_integer4, N - 1);
+                BCD_digit_4 <= conv_std_logic_vector(signal_integer1, N - 1);
+                BCD_digit_5 <= conv_std_logic_vector(signal_integer2, N - 1);
 
                 IF (minus_q = '1') THEN
-                    BCD_digit_3 <= "1011"; -- quotient minus
+                    BCD_digit_6 <= "1011"; -- quotient minus
                 ELSIF (minus_r = '1') THEN
-                    BCD_digit_6 <= "1011"; -- remainder minus
+                    BCD_digit_3 <= "1011"; -- remainder minus
                 ELSE
                     BCD_digit_3 <= "1111";
                     BCD_digit_6 <= "1111";
