@@ -27,7 +27,7 @@ ARCHITECTURE Structural OF CalculatorVHDL IS
     SIGNAL TRIG_ADD, TRIG_SUB, TRIG_MUL, TRIG_DIV : STD_LOGIC := '0';
     SIGNAL RESULT_ADD, RESULT_SUB, RESULT_DIV_QUO : STD_LOGIC_VECTOR(N - 1 DOWNTO 0) := (OTHERS => '0');
     SIGNAL RESULT_MUL, RESULT_DIV_REM : STD_LOGIC_VECTOR(2 * N - 1 DOWNTO 0) := (OTHERS => '0');
-    SIGNAL RESULT_DIV_MINUS_QUO, RESULT_DIV_MINUS_REM, RESULT_DIV_ERR : STD_LOGIC := '0'; 
+    SIGNAL RESULT_DIV_MINUS_QUO, RESULT_DIV_MINUS_REM, RESULT_DIV_ERR : STD_LOGIC := '0';
     SIGNAL MINUS_ADD, MINUS_SUB, MINUS_MUL, MINUS_DIV, MINUS_PREVIEW_A, MINUS_PREVIEW_B : STD_LOGIC := '0';
     SIGNAL SIGNDETECTED_ADD_RESULT, SIGNDETECTED_SUB_RESULT : STD_LOGIC_VECTOR(N - 1 DOWNTO 0) := (OTHERS => '0');
     SIGNAL V_ADD, V_SUB : STD_LOGIC := '0';
@@ -98,7 +98,7 @@ BEGIN
         PORT MAP(
             clk => CLK,
             data => STORE_OPERATOR,
-            BCD_All_digit => SEG1_O
+            BCD_digit_1 => SEG1_O
         );
 
     MUX_Result : ENTITY work.MUX18to3_Result(Behavioral) -- choose what value to show for the first 3 digit
@@ -106,13 +106,13 @@ BEGIN
             clk => CLK,
             control => STORE_STATE,
             operate => STORE_OPERATOR,
-            BCD_digit_1_S0 => SEG1_A, -- Show Preview A (Digit 1)
-            BCD_digit_2_S0 => SEG2_A, -- Show Preview A (Digit 2)
-            BCD_digit_3_S0 => SEG3_A, -- Show Preview A (Digit 3)
-            BCD_digit_1_S1 => SEG1_O, -- Show Preview Operator
-            BCD_digit_2_S1 => SEG1_O, -- Show Preview Operator
-            BCD_digit_3_S1 => SEG1_O, -- Show Preview Operator
-            BCD_digit_1_ADD => SEG1_ADD, -- Show results for every operations
+            BCD_digit_1_A => SEG1_A,
+            BCD_digit_2_A => SEG2_A,
+            BCD_digit_3_A => SEG3_A,
+            BCD_digit_1_B => SEG1_O,
+            BCD_digit_2_B => SEG1_O,
+            BCD_digit_3_B => SEG1_O,
+            BCD_digit_1_ADD => SEG1_ADD,
             BCD_digit_2_ADD => SEG2_ADD,
             BCD_digit_3_ADD => SEG3_ADD,
             BCD_digit_1_SUB => SEG1_SUB,
@@ -127,7 +127,10 @@ BEGIN
 
             BCD_TO_SEGMENT_1 => SEG1_A_BCDto7SEG,
             BCD_TO_SEGMENT_2 => SEG2_A_BCDto7SEG,
-            BCD_TO_SEGMENT_3 => SEG3_A_BCDto7SEG
+            BCD_TO_SEGMENT_3 => SEG3_A_BCDto7SEG,
+
+            DONE_LED_ADD => DONE_LED_ADD, -- Reserved for add done signal
+            DONE_LED_SUB => DONE_LED_SUB -- Reserved for subtract done signal
         );
 
     MUX_Remainder : ENTITY work.MUX18to3_Remainder(Behavioral) -- choose what value to show for the last 3 digit
@@ -135,24 +138,25 @@ BEGIN
             clk => CLK,
             control => STORE_STATE,
             operate => STORE_OPERATOR,
-            BCD_digit_4_S0 => SEG1_B, -- Show Preview B
-            BCD_digit_5_S0 => SEG2_B, -- Show Preview B
-            BCD_digit_6_S0 => SEG3_B, -- Show Preview B
-            BCD_digit_4_S1 => SEG1_O, -- Show Preview Operator
-            BCD_digit_5_S1 => SEG1_O, -- Show Preview Operator
-            BCD_digit_6_S1 => SEG1_O, -- Show Preview Operator 
-            BCD_digit_4_ADD => "1011", -- Show no remainder for add/sub/mul as "---"
-            BCD_digit_5_ADD => "1011",
-            BCD_digit_6_ADD => "1011",
-            BCD_digit_4_SUB => "1011",
-            BCD_digit_5_SUB => "1011",
-            BCD_digit_6_SUB => "1011",
-            BCD_digit_4_MUL => "1011",
-            BCD_digit_5_MUL => "1011",
-            BCD_digit_6_MUL => "1011",
-            BCD_digit_4_DIV => SEG4_DIV, -- Show remainder for division
+            BCD_digit_4_A => SEG1_B,
+            BCD_digit_5_A => SEG2_B,
+            BCD_digit_6_A => SEG3_B,
+            BCD_digit_4_B => SEG1_O,
+            BCD_digit_5_B => SEG1_O,
+            BCD_digit_6_B => SEG1_O,
+            BCD_digit_4_ADD => "1111",
+            BCD_digit_5_ADD => "1111",
+            BCD_digit_6_ADD => "1111",
+            BCD_digit_4_SUB => "1111",
+            BCD_digit_5_SUB => "1111",
+            BCD_digit_6_SUB => "1111",
+            BCD_digit_4_MUL => "1111",
+            BCD_digit_5_MUL => "1111",
+            BCD_digit_6_MUL => "1111",
+            BCD_digit_4_DIV => SEG4_DIV,
             BCD_digit_5_DIV => SEG5_DIV,
             BCD_digit_6_DIV => SEG6_DIV,
+
             BCD_TO_SEGMENT_4 => SEG1_B_BCDto7SEG,
             BCD_TO_SEGMENT_5 => SEG2_B_BCDto7SEG,
             BCD_TO_SEGMENT_6 => SEG3_B_BCDto7SEG
@@ -203,6 +207,7 @@ BEGIN
         PORT MAP(
             clk => CLK,
             enable => DONE,
+            resetop => NOT RST_N,
             operator_in => STORE_OPERATOR,
             enaop_adder => TRIG_ADD,
             enaop_subtractor => TRIG_SUB,
@@ -218,8 +223,7 @@ BEGIN
             clock => CLK,
             enable => TRIG_ADD,
             s => RESULT_ADD,
-            v => V_ADD,
-            DONE => DONE_LED_ADD -- Reserved for done signal
+            v => V_ADD
         );
 
     Subtractor : ENTITY work.BinaryAdderAndSubtractor(Structural)
@@ -230,10 +234,9 @@ BEGIN
             clock => CLK,
             enable => TRIG_SUB,
             s => RESULT_SUB,
-            v => V_SUB,
-            DONE => DONE_LED_SUB -- Reserved for done signal
+            v => V_SUB
         );
-    
+
     Multiplier : ENTITY work.BinaryMultiplier(Behavioral)
         PORT MAP(
             clk => CLK,
@@ -301,8 +304,9 @@ BEGIN
     BinaryToBCDConverter_Multiplier : ENTITY work.BinaryToBCDConverterMUL(Structural)
         PORT MAP(
             clk => CLK,
-            minus_con => STORE_A(N-1) XOR STORE_B(N-1),
+            minus_con => STORE_A(N - 1) XOR STORE_B(N - 1),
             data => RESULT_MUL,
+            rst => NOT RST_N,
             BCD_digit_1 => SEG1_MUL,
             BCD_digit_2 => SEG2_MUL,
             BCD_digit_3 => SEG3_MUL

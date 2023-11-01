@@ -10,6 +10,7 @@ ENTITY BinaryToBCDConverterMUL IS
         clk : IN STD_LOGIC;
         minus_con : IN STD_LOGIC;
         data : IN STD_LOGIC_VECTOR(2 * N - 1 DOWNTO 0);
+        rst : IN STD_LOGIC;
         BCD_digit_1 : OUT STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
         BCD_digit_2 : OUT STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
         BCD_digit_3 : OUT STD_LOGIC_VECTOR(N - 2 DOWNTO 0)
@@ -23,10 +24,10 @@ BEGIN
     PROCESS (clk)
     BEGIN
         IF rising_edge(clk) THEN
-            IF (unsigned(data) > 0001100011) THEN -- if more than 99
-                BCD_digit_1 <= "1101"; -- r
-                BCD_digit_2 <= "1101"; -- r
-                BCD_digit_3 <= "1100"; -- E
+            IF (unsigned(data) > 99) THEN
+                BCD_digit_1 <= "1101";
+                BCD_digit_2 <= "1101";
+                BCD_digit_3 <= "1100";
             ELSE
                 signal_integer1 <= conv_integer(unsigned(data)) MOD 10;
                 signal_integer2 <= (conv_integer(unsigned(data)) / 10) MOD 10;

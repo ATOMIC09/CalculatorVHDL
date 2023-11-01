@@ -10,8 +10,7 @@ ENTITY BinaryAdderAndSubtractor IS
         m, clock, enable : IN STD_LOGIC;
         s : OUT STD_LOGIC_VECTOR(N - 1 DOWNTO 0);
         c : OUT STD_LOGIC_VECTOR(N DOWNTO 1);
-        v : OUT STD_LOGIC;
-        DONE : OUT STD_LOGIC
+        v : OUT STD_LOGIC
     );
 END BinaryAdderAndSubtractor;
 
@@ -48,12 +47,6 @@ BEGIN
         );
     END GENERATE;
 
-    PROCESS (enable)
-    BEGIN
-        IF (enable = '1') THEN
-            v <= c_internal(N) XOR c_internal(N - 1); -- Calculate overflow
-            DONE <= '1';
-        END IF;
-    END PROCESS;
+    v <= c_internal(N) XOR c_internal(N - 1); -- Calculate overflow
 
 END Structural;

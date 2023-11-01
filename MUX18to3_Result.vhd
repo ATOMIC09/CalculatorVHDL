@@ -4,12 +4,12 @@ USE IEEE.STD_LOGIC_1164.ALL;
 ENTITY MUX18to3_Result IS
     GENERIC (N : INTEGER := 5);
     PORT (
-        BCD_digit_1_S0 : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0); -- Preview A
-        BCD_digit_2_S0 : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
-        BCD_digit_3_S0 : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
-        BCD_digit_1_S1 : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0); -- Preview Operator
-        BCD_digit_2_S1 : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
-        BCD_digit_3_S1 : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_1_A : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_2_A : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_3_A : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_1_B : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_2_B : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+        BCD_digit_3_B : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
 
         BCD_digit_1_ADD : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
         BCD_digit_2_ADD : IN STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
@@ -31,6 +31,9 @@ ENTITY MUX18to3_Result IS
         BCD_TO_SEGMENT_2 : OUT STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
         BCD_TO_SEGMENT_3 : OUT STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
 
+        DONE_LED_ADD : OUT STD_LOGIC;
+        DONE_LED_SUB : OUT STD_LOGIC;
+
         control : IN STD_LOGIC_VECTOR;
         operate : IN STD_LOGIC_VECTOR;
         clk : IN STD_LOGIC
@@ -41,19 +44,33 @@ ARCHITECTURE Behavioral OF MUX18to3_Result IS
     SIGNAL BCD_TO_SEGMENT_1_temp : STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
     SIGNAL BCD_TO_SEGMENT_2_temp : STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
     SIGNAL BCD_TO_SEGMENT_3_temp : STD_LOGIC_VECTOR(N - 2 DOWNTO 0);
+    SIGNAL DONE_LED_ADD_temp : STD_LOGIC := '0';
+    SIGNAL DONE_LED_SUB_temp : STD_LOGIC := '0';
 BEGIN
     PROCESS (clk)
     BEGIN
+
         IF rising_edge(clk) THEN
-            IF control = "00" THEN -- Choose Preview A
-                BCD_TO_SEGMENT_1_temp <= BCD_digit_1_S0;
-                BCD_TO_SEGMENT_2_temp <= BCD_digit_2_S0;
-                BCD_TO_SEGMENT_3_temp <= BCD_digit_3_S0;
-            ELSIF control = "01" THEN -- Choose Preview Operator
-                BCD_TO_SEGMENT_1_temp <= BCD_digit_1_S1;
-                BCD_TO_SEGMENT_2_temp <= BCD_digit_2_S1;
-                BCD_TO_SEGMENT_3_temp <= BCD_digit_3_S1;
-            ELSIF control = "10" THEN -- Choose Result
+            IF control = "00" THEN
+                BCD_TO_SEGMENT_1_temp <= BCD_digit_1_A;
+                BCD_TO_SEGMENT_2_temp <= BCD_digit_2_A;
+                BCD_TO_SEGMENT_3_temp <= BCD_digit_3_A;
+                DONE_LED_ADD_temp <= '0';
+                DONE_LED_SUB_temp <= '0';
+            ELSIF control = "01" THEN
+                BCD_TO_SEGMENT_1_temp <= BCD_digit_1_B;
+                BCD_TO_SEGMENT_2_temp <= BCD_digit_2_B;
+                BCD_TO_SEGMENT_3_temp <= BCD_digit_3_B;
+                DONE_LED_ADD_temp <= '0';
+                DONE_LED_SUB_temp <= '0';
+            ELSIF control = "10" THEN
+
+                IF operate = "11" THEN
+                    DONE_LED_ADD_temp <= '1';
+                ELSIF operate = "10" THEN
+                    DONE_LED_SUB_temp <= '1';
+                END IF;
+
                 IF operate = "00" THEN
                     BCD_TO_SEGMENT_1_temp <= BCD_digit_1_DIV;
                     BCD_TO_SEGMENT_2_temp <= BCD_digit_2_DIV;
@@ -78,4 +95,6 @@ BEGIN
     BCD_TO_SEGMENT_1 <= BCD_TO_SEGMENT_1_temp;
     BCD_TO_SEGMENT_2 <= BCD_TO_SEGMENT_2_temp;
     BCD_TO_SEGMENT_3 <= BCD_TO_SEGMENT_3_temp;
+    DONE_LED_ADD <= DONE_LED_ADD_temp;
+    DONE_LED_SUB <= DONE_LED_SUB_temp;
 END Behavioral;

@@ -28,7 +28,7 @@ BEGIN
 
 				WHEN "1011" => seven_seg <= "0111111"; --7-segment display minus
 
-				WHEN "1100" => seven_seg <= "0001110"; --7-segment display E
+				WHEN "1100" => seven_seg <= "0000110"; --7-segment display E
 				WHEN "1101" => seven_seg <= "0101111"; --7-segment display r
 
 				WHEN OTHERS => seven_seg <= "1111111"; --7-segment display none

@@ -33,21 +33,21 @@ BEGIN
     PROCESS (clk)
     BEGIN
         IF rising_edge(clk) THEN
-            IF (unsigned(data_q) > 11111) THEN -- ERR overflow
-                BCD_digit_1 <= "1101"; -- R
-                BCD_digit_2 <= "1101"; -- R
-                BCD_digit_3 <= "1100"; -- E
-                BCD_digit_4 <= "1101"; -- R
-                BCD_digit_5 <= "1101"; -- R
-                BCD_digit_6 <= "1100"; -- E
-            ELSIF (unsigned(data_r) > 0001100011) THEN -- ERR overflow
-                BCD_digit_1 <= "1101"; -- R
-                BCD_digit_2 <= "1101"; -- R
-                BCD_digit_3 <= "1100"; -- E
-                BCD_digit_4 <= "1101"; -- R
-                BCD_digit_5 <= "1101"; -- R
-                BCD_digit_6 <= "1100"; -- E
-            ELSIF (data_err = '1') THEN -- ERR div by zero
+            --IF (unsigned(data_q) > 11111) THEN -- ERR overflow
+            --  BCD_digit_1 <= "1101"; -- R
+            -- BCD_digit_2 <= "1101"; -- R
+            -- BCD_digit_3 <= "1100"; -- E
+            -- BCD_digit_4 <= "1101"; -- R
+            --  BCD_digit_5 <= "1101"; -- R
+            --  BCD_digit_6 <= "1100"; -- E
+            -- ELSIF (unsigned(data_r) > 0001100011) THEN -- ERR overflow
+            --  BCD_digit_1 <= "1101"; -- R
+            --  BCD_digit_2 <= "1101"; -- R
+            --  BCD_digit_3 <= "1100"; -- E
+            --  BCD_digit_4 <= "1101"; -- R
+            --  BCD_digit_5 <= "1101"; -- R
+            --  BCD_digit_6 <= "1100"; -- E
+            IF (data_err = '1') THEN -- ERR div by zero
                 BCD_digit_1 <= "1101"; -- R
                 BCD_digit_2 <= "1101"; -- R
                 BCD_digit_3 <= "1100"; -- E
@@ -60,15 +60,15 @@ BEGIN
                 signal_integer3 <= conv_integer(unsigned(data_r)) MOD 10;
                 signal_integer4 <= (conv_integer(unsigned(data_r)) / 10) MOD 10;
 
-                BCD_digit_1 <= conv_std_logic_vector(signal_integer3, N - 1);
-                BCD_digit_2 <= conv_std_logic_vector(signal_integer4, N - 1);
-                BCD_digit_4 <= conv_std_logic_vector(signal_integer1, N - 1);
-                BCD_digit_5 <= conv_std_logic_vector(signal_integer2, N - 1);
+                BCD_digit_1 <= conv_std_logic_vector(signal_integer1, N - 1);
+                BCD_digit_2 <= conv_std_logic_vector(signal_integer2, N - 1);
+                BCD_digit_4 <= conv_std_logic_vector(signal_integer3, N - 1);
+                BCD_digit_5 <= conv_std_logic_vector(signal_integer4, N - 1);
 
                 IF (minus_q = '1') THEN
-                    BCD_digit_6 <= "1011"; -- quotient minus
+                    BCD_digit_3 <= "1011"; -- quotient minus
                 ELSIF (minus_r = '1') THEN
-                    BCD_digit_3 <= "1011"; -- remainder minus
+                    BCD_digit_6 <= "1011"; -- remainder minus
                 ELSE
                     BCD_digit_3 <= "1111";
                     BCD_digit_6 <= "1111";

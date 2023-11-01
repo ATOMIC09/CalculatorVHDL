@@ -5,7 +5,7 @@ ENTITY BinaryToBCDConverterPreviewOperator IS
     PORT (
         clk : IN STD_LOGIC;
         data : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
-        BCD_All_digit : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
+        BCD_digit_1 : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
     );
 END BinaryToBCDConverterPreviewOperator;
 
@@ -15,7 +15,7 @@ BEGIN
     PROCESS (clk)
     BEGIN
         IF rising_edge(clk) THEN
-            BCD_All_digit <= "00" & data;
+            BCD_digit_1 <= "00" & data;
         END IF;
     END PROCESS;
 END Structural;
