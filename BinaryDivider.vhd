@@ -66,7 +66,7 @@ BEGIN
                 -- FSM for BinaryDivider
                 CASE state IS
                     WHEN s0 =>
-                        IF enable = '1' AND s_start = '1' THEN
+                        IF enable = '1' and s_start = '1' THEN
                             data_Divisor <= STD_LOGIC_VECTOR(normalised_data_Divisor) & STD_LOGIC_VECTOR(to_unsigned(0, N));
                             data_Remainder <= STD_LOGIC_VECTOR(to_unsigned(0, N)) & STD_LOGIC_VECTOR(normalised_data_Dividend);
                             state <= s1;
@@ -85,34 +85,34 @@ BEGIN
                             ELSIF data_Remainder >= data_Divisor THEN
                                 data_Remainder <= STD_LOGIC_VECTOR(unsigned(data_Remainder) - unsigned(data_Divisor));
                                 data_Divisor <= STD_LOGIC_VECTOR(shift_right(unsigned(data_Divisor), 1));
-                                data_Quotient <= STD_LOGIC_VECTOR(data_Quotient(N - 2 DOWNTO 0)) & "1";
+                                data_Quotient <= STD_LOGIC_VECTOR(data_Quotient(N-2 DOWNTO 0)) & "1";
                                 counter <= counter + 1;
                             END IF;
                         ELSE
-                            IF Divident(N - 1) = '0' AND Divisor(N - 1) = '0' THEN
+                            if Divident(N - 1) = '0' AND Divisor(N - 1) = '0' THEN
                                 Quotient <= data_Quotient;
                                 Remainder <= data_Remainder;
                                 MINUS_QUOTIENT <= '0';
                                 MINUS_REMAINDER <= '0';
-                            ELSIF Divident(N - 1) = '1' AND Divisor(N - 1) = '0' THEN
+                            elsif Divident(N - 1) = '1' AND Divisor(N - 1) = '0' THEN
                                 Quotient <= data_Quotient + 1;
                                 Remainder <= data_Remainder + 1;
                                 MINUS_QUOTIENT <= '1';
                                 MINUS_REMAINDER <= '0';
-                            ELSIF Divident(N - 1) = '0' AND Divisor(N - 1) = '1' THEN
+                            elsif Divident(N - 1) = '0' AND Divisor(N - 1) = '1' THEN
                                 Quotient <= data_Quotient + 1;
                                 Remainder <= data_Remainder + 1;
                                 MINUS_QUOTIENT <= '1';
                                 MINUS_REMAINDER <= '1';
-                            ELSIF Divident(N - 1) = '1' AND Divisor(N - 1) = '1' THEN
+                            elsif Divident(N - 1) = '1' AND Divisor(N - 1) = '1' THEN
                                 Quotient <= data_Quotient;
                                 Remainder <= data_Remainder;
                                 MINUS_QUOTIENT <= '0';
                                 MINUS_REMAINDER <= '1';
-                            END IF;
+                            end if;
                             state <= s2;
                         END IF;
-                    WHEN OTHERS =>
+                    WHEN others =>
                         DONE <= '1';
                 END CASE;
             END IF;

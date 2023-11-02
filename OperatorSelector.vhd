@@ -15,11 +15,11 @@ BEGIN
     PROCESS (clk, enable, resetop, operator_in)
     BEGIN
         IF rising_edge(clk) THEN
-            IF resetop = '1' THEN
-                enaop_divider <= '0';
-                enaop_subtractor <= '0';
-                enaop_multiplier <= '0';
-                enaop_adder <= '0';
+			IF resetop = '1' THEN
+				enaop_divider <= '0';
+				enaop_subtractor <= '0';
+				enaop_multiplier <= '0';
+				enaop_adder <= '0';
             ELSIF enable = '1' THEN
                 CASE operator_in IS
                     WHEN "00" => -- Division

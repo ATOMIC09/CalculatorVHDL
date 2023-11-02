@@ -37,8 +37,8 @@ BEGIN
             data_A <= (OTHERS => '0');
             data_B <= (OTHERS => '0');
             data_R <= (OTHERS => '0');
-
-        ELSIF rising_edge(clk) THEN
+        
+		  ELSIF rising_edge(clk) THEN
 
             -- detect a sign bit. if it's 1, do 2 compliment.
             IF A(N - 1) = '1' THEN

@@ -21,10 +21,10 @@ ARCHITECTURE Structural OF BinaryAdderAndSubtractor IS
             s, c : OUT STD_LOGIC
         );
     END COMPONENT;
-    SIGNAL c_internal : STD_LOGIC_VECTOR(1 TO N);
+	SIGNAL c_internal : STD_LOGIC_VECTOR(1 to N);
 BEGIN
     FA0 : FullAdder
-    PORT MAP(
+    PORT MAP (
         x => a(0),
         y => m XOR b(0),
         z => m,
@@ -36,7 +36,7 @@ BEGIN
 
     FA_gen : FOR i IN 1 TO N - 1 GENERATE
         FAi : FullAdder
-        PORT MAP(
+        PORT MAP (
             x => a(i),
             y => m XOR b(i),
             z => c_internal(i),

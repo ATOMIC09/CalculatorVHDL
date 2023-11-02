@@ -34,19 +34,19 @@ BEGIN
     BEGIN
         IF rising_edge(clk) THEN
             --IF (unsigned(data_q) > 11111) THEN -- ERR overflow
-            --  BCD_digit_1 <= "1101"; -- R
-            -- BCD_digit_2 <= "1101"; -- R
-            -- BCD_digit_3 <= "1100"; -- E
-            -- BCD_digit_4 <= "1101"; -- R
-            --  BCD_digit_5 <= "1101"; -- R
-            --  BCD_digit_6 <= "1100"; -- E
+              --  BCD_digit_1 <= "1101"; -- R
+               -- BCD_digit_2 <= "1101"; -- R
+               -- BCD_digit_3 <= "1100"; -- E
+               -- BCD_digit_4 <= "1101"; -- R
+              --  BCD_digit_5 <= "1101"; -- R
+              --  BCD_digit_6 <= "1100"; -- E
             -- ELSIF (unsigned(data_r) > 0001100011) THEN -- ERR overflow
-            --  BCD_digit_1 <= "1101"; -- R
-            --  BCD_digit_2 <= "1101"; -- R
-            --  BCD_digit_3 <= "1100"; -- E
-            --  BCD_digit_4 <= "1101"; -- R
-            --  BCD_digit_5 <= "1101"; -- R
-            --  BCD_digit_6 <= "1100"; -- E
+              --  BCD_digit_1 <= "1101"; -- R
+              --  BCD_digit_2 <= "1101"; -- R
+              --  BCD_digit_3 <= "1100"; -- E
+              --  BCD_digit_4 <= "1101"; -- R
+              --  BCD_digit_5 <= "1101"; -- R
+              --  BCD_digit_6 <= "1100"; -- E
             IF (data_err = '1') THEN -- ERR div by zero
                 BCD_digit_1 <= "1101"; -- R
                 BCD_digit_2 <= "1101"; -- R
