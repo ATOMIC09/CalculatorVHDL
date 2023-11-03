@@ -95,15 +95,15 @@ BEGIN
                                 MINUS_QUOTIENT <= '0';
                                 MINUS_REMAINDER <= '0';
                             elsif Divident(N - 1) = '1' AND Divisor(N - 1) = '0' THEN
-                                Quotient <= data_Quotient + 1;
-                                Remainder <= data_Remainder + 1;
+                                Quotient <= data_Quotient;
+                                Remainder <= data_Remainder;
                                 MINUS_QUOTIENT <= '1';
                                 MINUS_REMAINDER <= '0';
                             elsif Divident(N - 1) = '0' AND Divisor(N - 1) = '1' THEN
-                                Quotient <= data_Quotient + 1;
-                                Remainder <= data_Remainder + 1;
+                                Quotient <= data_Quotient;
+                                Remainder <= data_Remainder;
                                 MINUS_QUOTIENT <= '1';
-                                MINUS_REMAINDER <= '1';
+                                MINUS_REMAINDER <= '0';
                             elsif Divident(N - 1) = '1' AND Divisor(N - 1) = '1' THEN
                                 Quotient <= data_Quotient;
                                 Remainder <= data_Remainder;

@@ -65,11 +65,16 @@ BEGIN
                 BCD_digit_4 <= conv_std_logic_vector(signal_integer3, N - 1);
                 BCD_digit_5 <= conv_std_logic_vector(signal_integer4, N - 1);
 
-                IF (minus_q = '1') THEN
-                    BCD_digit_3 <= "1011"; -- quotient minus
-                ELSIF (minus_r = '1') THEN
-                    BCD_digit_6 <= "1011"; -- remainder minus
-                ELSE
+                IF (minus_q = '1') and (minus_r = '0') THEN
+                    BCD_digit_3 <= "1011";
+						  BCD_digit_6 <= "1111"; 
+                ELSIF (minus_q = '0') and (minus_r = '1') THEN
+						  BCD_digit_3 <= "1111";
+                    BCD_digit_6 <= "1011";
+                ELSIF (minus_q = '1') and (minus_r = '1') THEN 
+                    BCD_digit_3 <= "1011";
+                    BCD_digit_6 <= "1011";
+					 ELSE
                     BCD_digit_3 <= "1111";
                     BCD_digit_6 <= "1111";
                 END IF;

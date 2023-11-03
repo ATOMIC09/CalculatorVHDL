@@ -20,7 +20,10 @@ ARCHITECTURE Behavioral OF FSM IS
 BEGIN
     PROCESS (clk, rst_n, start)
     BEGIN
-        IF rising_edge(start) THEN
+		  IF rst_n = '1' THEN
+				done <= '0';
+				current_state <= GET_AandB;
+        ELSIF falling_edge(start) THEN
             CASE current_state IS
                 WHEN GET_AandB => current_state <= GET_OPERATOR;
                 WHEN GET_OPERATOR => current_state <= FINISHED;
@@ -28,10 +31,6 @@ BEGIN
             END CASE;
         END IF;
 
-        IF rst_n = '1' THEN
-            done <= '0';
-            current_state <= GET_AandB;
-        ELSIF rising_edge(clk) THEN
             CASE current_state IS
                 WHEN GET_AandB =>
                     A_out <= switches(2 * N - 1 DOWNTO (2 * N - 1) - (N - 1));
@@ -44,7 +43,7 @@ BEGIN
                     done <= '1';
                     state_out <= "10";
             END CASE;
-        END IF;
+    
     END PROCESS;
 
 END Behavioral;
